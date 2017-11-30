@@ -76,6 +76,7 @@ class profileHandle extends item
 	//uncomment for testing
 	public static void main(String args[])
 	{
+		//profile testing
 		profileHandle ah = new profileHandle("admin", "admin");
 		profileHandle ah1 = new profileHandle(1234);
 		System.out.println(ah.firstname);
@@ -83,6 +84,7 @@ class profileHandle extends item
 		System.out.println(ah.email);
 		System.out.println(ah1.phonenumber);
 
+		//account handle testing
 		accountHandle ah2 = new accountHandle("admin");
 		System.out.println(ah2.id);
 		System.out.println(ah2.owner);
@@ -100,5 +102,11 @@ class profileHandle extends item
 		{
 			System.out.println(sah.id);
 		} 
+
+		//actor testing
+		actor a = new actor(2);
+		System.out.println(a.stock_symbol);
+		System.out.println(a.firstname);
+		System.out.println(a.s_id);
 	}
 }
