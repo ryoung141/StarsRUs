@@ -48,8 +48,10 @@ CREATE TABLE market_account(
 
 CREATE TABLE stock_account(
 	a_id int(100) NOT NULL PRIMARY KEY,
+	master_id int(100) NOT NULL,
+	s_id int(100) NOT NULL,
 	balance FLOAT(13, 3),
-	FOREIGN KEY (a_id)
+	FOREIGN KEY (master_id)
 		REFERENCES account(a_id)
 		ON UPDATE CASCADE ON DELETE CASCADE
 	);
@@ -149,3 +151,6 @@ ALTER TABLE sell
 
 ALTER TABLE accrue_interest
 	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
+
+ALTER TABLE stock_account
+	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON UPDATE CASCADE;

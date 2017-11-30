@@ -2,83 +2,55 @@ package StarsRUSModels;
 
 import java.sql.*;
 
-class accountHandle
+class accountHandle extends item
 {
-	static final String CONNECTION = "jdbc:mysql://localhost:3306/cs174a";
-	static final String USER = "root";
-	static final String PASS = " ";
-	ResultSet accountData;
-	int id;
-	String username;
-	String firstname;
-	String lastname;
-	String state_code;
-	String phonenumber;
-	String email;
+	String owner;
 
-
-	public accountHandle(String username, String password)
+	public accountHandle()
 	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(CONNECTION, USER, PASS);
-			Statement stmt = con.createStatement();
-			String query = "SELECT * FROM customer_profile WHERE username='"+username+"' AND password='"+password+"'";
-			ResultSet rs = stmt.executeQuery(query);
-
-			if(rs.next())
-			{
-				this.accountData = rs;
-				this.id = rs.getInt("tax_id");
-				this.username = rs.getString("username");
-				this.firstname = rs.getString("firstname");
-				this.lastname = rs.getString("lastname");
-				this.state_code = rs.getString("state");
-				this.phonenumber = rs.getString("phonenumber");
-				this.email = rs.getString("email");
-			}
-			
-			con.close();
-		}catch(Exception e){System.out.println(e);}
-		
+		super();
 	}
 
 	public accountHandle(int id)
 	{
+		super();
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(CONNECTION, USER, PASS);
-			Statement stmt = con.createStatement();
-			String query = "SELECT * FROM customer_profile WHERE tax_id="+id;
+			Statement stmt = this.con.createStatement();
+			String query = "SELECT owner FROM account WHERE a_id="+id;
 			ResultSet rs = stmt.executeQuery(query);
-			
+
 			if(rs.next())
 			{
-				this.accountData = rs;
-				this.id = rs.getInt("tax_id");
-				this.username = rs.getString("username");
-				this.firstname = rs.getString("firstname");
-				this.lastname = rs.getString("lastname");
-				this.state_code = rs.getString("state");
-				this.phonenumber = rs.getString("phonenumber");
-				this.email = rs.getString("email");
+				this.owner = rs.getString("owner");
 			}
-			
-			con.close();
 		}catch(Exception e){System.out.println(e);}
-		
+
+		this.closeConnection();
 	}
 
-	//uncomment for testing
-	/*public static void main(String args[])
+	public accountHandle(String owner)
 	{
-		accountHandle ah = new accountHandle("admin", "admin");
-		accountHandle ah1 = new accountHandle(1234);
-		System.out.println(ah.firstname);
-		System.out.println(ah1.lastname);
-		System.out.println(ah.email);
-		System.out.println(ah1.phonenumber);
-	}*/
+		super();
+		try
+		{
+			Statement stmt = this.con.createStatement();
+			String query = "SELECT a_id FROM account WHERE owner="+owner;
+			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next())
+			{
+				this.id = rs.getInt("a_id");
+			}
+		}catch(Exception e){System.out.println(e);}
+		
+		this.closeConnection();
+	}
+
+	public accountHandle(int id, String owner)
+	{
+		super();
+		this.id = id;
+		this.owner = owner;
+	}
 }
