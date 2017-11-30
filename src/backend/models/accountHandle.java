@@ -23,6 +23,7 @@ class accountHandle extends item
 			if(rs.next())
 			{
 				this.owner = rs.getString("owner");
+				this.id = id;
 			}
 		}catch(Exception e){System.out.println(e);}
 
@@ -35,11 +36,12 @@ class accountHandle extends item
 		try
 		{
 			Statement stmt = this.con.createStatement();
-			String query = "SELECT a_id FROM account WHERE owner="+owner;
+			String query = "SELECT a_id FROM account WHERE owner='"+owner+"'";
 			ResultSet rs = stmt.executeQuery(query);
 
 			if(rs.next())
 			{
+				this.owner = owner;
 				this.id = rs.getInt("a_id");
 			}
 		}catch(Exception e){System.out.println(e);}

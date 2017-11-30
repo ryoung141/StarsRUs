@@ -82,5 +82,23 @@ class profileHandle extends item
 		System.out.println(ah1.lastname);
 		System.out.println(ah.email);
 		System.out.println(ah1.phonenumber);
+
+		accountHandle ah2 = new accountHandle("admin");
+		System.out.println(ah2.id);
+		System.out.println(ah2.owner);
+
+		marketAccountHandle mh = new marketAccountHandle(ah2.id);
+		System.out.println(mh.balance);
+
+		stockAccountHandle sh = new stockAccountHandle();
+		stockAccountHandle sh1 = new stockAccountHandle(4);
+		System.out.println(sh1.id);
+		System.out.println(sh1.balance);
+		System.out.println(sh1.master_id);
+		sh.getStockAccounts(ah2.id);
+		for(stockAccountHandle sah: sh.accountList)
+		{
+			System.out.println(sah.id);
+		} 
 	}
 }

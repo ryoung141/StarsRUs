@@ -47,7 +47,7 @@ CREATE TABLE market_account(
 	);
 
 CREATE TABLE stock_account(
-	a_id int(100) NOT NULL PRIMARY KEY,
+	a_id int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	master_id int(100) NOT NULL,
 	s_id int(100) NOT NULL,
 	balance FLOAT(13, 3),
