@@ -108,5 +108,10 @@ class profileHandle extends item
 		System.out.println(a.stock_symbol);
 		System.out.println(a.firstname);
 		System.out.println(a.s_id);
+
+		//stock testing
+		stock s = new stock(2);
+		System.out.println(s.stock_symbol);
+		System.out.println(s.active);
 	}
 }
