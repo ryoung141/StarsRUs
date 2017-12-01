@@ -113,5 +113,11 @@ class profileHandle extends item
 		stock s = new stock(2);
 		System.out.println(s.stock_symbol);
 		System.out.println(s.active);
+
+		//contract testing
+		contract c = new contract(2);
+		System.out.println(c.total_value);
+		System.out.println(c.role);
+		System.out.println(c.year_released);
 	}
 }
