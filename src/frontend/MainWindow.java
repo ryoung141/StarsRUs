@@ -6,13 +6,22 @@ import javax.swing.*;
 public class MainWindow {
 
 	private JFrame frame;
+	public static JPanel mainPanel;
 
 	public MainWindow() {
 
 		//Instantiate Frame
 		frame = new JFrame();
 
-		frame.add(new CreateAccPanel());
+		mainPanel = new JPanel(new CardLayout());
+
+		JPanel card1 = new LoginPanel();
+		JPanel card2 = new CreateAccPanel();
+
+		mainPanel.add(card1, "Login");
+		mainPanel.add(card2, "Create Acc");
+
+		frame.add(mainPanel);
 
 		//Set window propertiers
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

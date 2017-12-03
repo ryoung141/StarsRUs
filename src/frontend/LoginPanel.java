@@ -13,11 +13,9 @@ public class LoginPanel extends JPanel {
 	private JButton loginButton;
 	private JButton createAccButton;
 
-	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
 	public LoginPanel() {
 		this.setLayout(null);
-		this.setBackground(Color.green);
+		this.setBackground(Color.GRAY);
 
 		//Styling
 		title = new JLabel("StarsRus");
@@ -48,13 +46,8 @@ public class LoginPanel extends JPanel {
 		//Event listeners
 		createAccButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				JDialog d = new JDialog(frame,  "Create Account");
-
-				JPanel createAccPanel = new CreateAccPanel();
-				d.add(createAccPanel);
-
-				d.setSize(800,600);
-				d.setVisible(true);
+				CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
+				c.show(MainWindow.mainPanel, "Create Acc");
 			}
 		});
 

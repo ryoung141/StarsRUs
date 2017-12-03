@@ -88,7 +88,7 @@ public class CreateAccPanel extends JPanel {
 
 	public CreateAccPanel() {
 		this.setLayout(null);
-		this.setBackground(Color.green);
+		this.setBackground(Color.GRAY);
 
 		int base = 150;
 
