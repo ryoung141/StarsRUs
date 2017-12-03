@@ -2,6 +2,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.regex.*;
 
 public class CreateAccPanel extends JPanel {
 	//Define components
@@ -126,10 +127,10 @@ public class CreateAccPanel extends JPanel {
 		phoneNumField1.setBounds(425, base + 2*(35), 35, 25);
 
 		phoneNumField2 = new JTextField();
-		phoneNumField2.setBounds(470, base + 2*(35), 35, 23);
+		phoneNumField2.setBounds(470, base + 2*(35), 35, 25);
 
 		phoneNumField3 = new JTextField();
-		phoneNumField3.setBounds(515, base + 2*(35), 45, 23);
+		phoneNumField3.setBounds(515, base + 2*(35), 45, 25);
 
 		emailLabel = new JLabel("Email");
 		emailLabel.setBounds(200, base + 3*(35), 75, 25);
@@ -190,38 +191,46 @@ public class CreateAccPanel extends JPanel {
 				String confirmPass = confirmPasswordField.getText();
 
 				//Verify Inputs
+				boolean accReadyForCreation = true;
 				errorMessage.setText("");
 
 				if(!verifyName(firstName)) {
 					errorMessage.setText("Error: First name must contain only characters");
+					accReadyForCreation = false;
 				}
 
 				if(!verifyName(lastName)) {
 					errorMessage.setText("Error: Last name must contain only characters");
+					accReadyForCreation = false;
 				}
 
 				if(!verifyPhoneNum(phoneNum)) {
 					errorMessage.setText("Error: Phone number must be formatted (000) 000-0000");
+					accReadyForCreation = false;
 				}
 
 				if(!verifyEmail(email)) {
 					errorMessage.setText("Error: Invalid email");
+					accReadyForCreation = false;
 				}
 
 				if(!verifyTaxId(taxID)) {
 					errorMessage.setText("Error: Invalid tax ID");
+					accReadyForCreation = false;
 				}
 
 				if(!verifyUsername(username)) {
 					errorMessage.setText("Error: Username can only contain letters and numbers");
+					accReadyForCreation = false;
 				}
 
 				if(!verifySamePass(password, confirmPass)) {
 					errorMessage.setText("Error: Passwords do not match");
+					accReadyForCreation = false;
 				}
 
 				//Debug
-				System.out.println(firstName);
+				/*System.out.println(firstName);
 				System.out.println(lastName);
 				System.out.println(stateCode);
 				System.out.println(phoneNum);
@@ -229,7 +238,7 @@ public class CreateAccPanel extends JPanel {
 				System.out.println(taxID);
 				System.out.println(username);
 				System.out.println(password);
-				System.out.println(confirmPass);
+				System.out.println(confirmPass);*/
 			 }
 		});
 
@@ -262,23 +271,56 @@ public class CreateAccPanel extends JPanel {
 	}
 
 	public boolean verifyName(String name) {
-		return true;
+		String regex = "[a-zA-Z]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(name);
+
+		if(matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
 	} 
 
 	public boolean verifyPhoneNum(String phoneNum) {
-		return true;
+		String regex = "[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(phoneNum);
+
+		if(matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean verifyEmail(String email) {
-		return true;
+		String regex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(email);
+
+		if(matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean verifyTaxId(String taxID) {
+		//TODO: Implement tax id
 		return true;
 	}
 
 	public boolean verifyUsername(String username) {
-		return true;
+		String regex = "[a-zA-Z0-9]+";
+		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(username);
+
+		if(matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean verifySamePass(String pass1, String pass2) {
