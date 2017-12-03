@@ -235,7 +235,30 @@ public class CreateAccPanel extends JPanel {
 
 				//Add to Datebase
 				if(accReadyForCreation) {
-					createUser(firstname, lastname, phoneNum, email, taxID, username, password);
+					if(createUser(firstName, lastName, phoneNum, email, taxID, username, password)) {
+						JDialog d = new JDialog();
+						d.setSize(200, 100);
+						JLabel msg = new JLabel("Account Created!");
+						msg.setHorizontalAlignment(JLabel.CENTER);
+						d.add(msg);
+						d.setVisible(true);
+
+						CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
+						c.show(MainWindow.mainPanel, MainWindow.LOGIN_PANEL);
+
+						//Clear inputs
+						firstNameField.setText("");
+						lastNameField.setText("");
+						StateField.setSelectedIndex(0);
+						phoneNumField1.setText(""); 
+						phoneNumField2.setText(""); 
+						phoneNumField3.setText("");
+						emailField.setText("");
+						taxIdField.setText("");
+						usernameField.setText("");
+						passwordField.setText("");
+						confirmPasswordField.setText("");
+					}
 				}
 
 				//Debug
@@ -361,7 +384,7 @@ public class CreateAccPanel extends JPanel {
 		}
 	}
 
-	public boolean createUser(firstname, lastname, phoneNum, email, taxID, username, password){
+	public boolean createUser(String firstName, String lastName, String phoneNum, String email, String taxID, String username, String password){
 		//TODO: Implement with mySQL connection
 		return true;
 	}

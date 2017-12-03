@@ -9,6 +9,7 @@ public class MainWindow {
 	public static JPanel mainPanel;
 	public static final String LOGIN_PANEL = "Login Screen";
 	public static final String CREATE_ACC_PANEL = "Create account";
+	public static final String TRADER_INTERFACE = "Trader interface";
 
 	public MainWindow() {
 

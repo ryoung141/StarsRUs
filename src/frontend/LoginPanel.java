@@ -44,6 +44,19 @@ public class LoginPanel extends JPanel {
 		createAccButton.setBounds(410, 325, 150, 50);
 
 		//Event listeners
+		loginButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String username = usernameField.getText();
+				String password = passwordField.getText();
+
+				if(authenticateUser(username, password)){
+					System.out.println("Access Granted");
+					/*CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
+					c.show(MainWindow.mainPanel, MainWindow.TRADER_INTERFACE);*/
+				}
+			}
+		});
+		
 		createAccButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
@@ -60,5 +73,10 @@ public class LoginPanel extends JPanel {
 		this.add(loginButton);
 		this.add(createAccButton);
 
+	}
+
+	public boolean authenticateUser(String username, String password) {
+		//TODO: Implement
+		return true;
 	}
 }
