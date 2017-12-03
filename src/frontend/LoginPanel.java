@@ -53,8 +53,7 @@ public class LoginPanel extends JPanel {
 				JPanel createAccPanel = new CreateAccPanel();
 				d.add(createAccPanel);
 
-				d.setSize(300,300);
-				d.setLocationRelativeTo(this);
+				d.setSize(800,600);
 				d.setVisible(true);
 			}
 		});

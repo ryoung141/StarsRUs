@@ -12,7 +12,7 @@ public class MainWindow {
 		//Instantiate Frame
 		frame = new JFrame();
 
-		frame.add(new LoginScreen());
+		frame.add(new CreateAccPanel());
 
 		//Set window propertiers
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
