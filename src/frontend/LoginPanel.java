@@ -51,8 +51,8 @@ public class LoginPanel extends JPanel {
 
 				if(authenticateUser(username, password)){
 					System.out.println("Access Granted");
-					/*CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
-					c.show(MainWindow.mainPanel, MainWindow.TRADER_INTERFACE);*/
+					CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
+					c.show(MainWindow.mainPanel, MainWindow.TRADER_INTERFACE);
 				}
 			}
 		});
