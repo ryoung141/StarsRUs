@@ -21,13 +21,14 @@ public class CreateAccPanel extends JPanel {
 	private JTextField emailField;
 	private JLabel taxIdLabel;
 	private JTextField taxIdField;
-	private JButton createAccButton;
 	private JLabel usernameLabel;
 	private JTextField usernameField;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
 	private JLabel confirmPasswordLabel;
 	private JPasswordField confirmPasswordField;
+	private JButton createAccButton;
+	private JButton cancelButton;
 	private JLabel errorMessage;
 	
 
@@ -168,7 +169,10 @@ public class CreateAccPanel extends JPanel {
 		confirmPasswordField.setBounds(300, base + 7*(35), 300, 25);
 
 		createAccButton = new JButton("CREATE ACCOUNT");
-		createAccButton.setBounds(325, base + 8*(35), 150, 50);
+		createAccButton.setBounds(240, base + 8*(35), 150, 50);
+
+		cancelButton = new JButton("CANCEL");
+		cancelButton.setBounds(410, base + 8*(35), 150, 50);
 
 		errorMessage = new JLabel();
 		errorMessage.setHorizontalAlignment(JLabel.CENTER);
@@ -229,6 +233,11 @@ public class CreateAccPanel extends JPanel {
 					accReadyForCreation = false;
 				}
 
+				//Add to Datebase
+				if(accReadyForCreation) {
+					createUser(firstname, lastname, phoneNum, email, taxID, username, password);
+				}
+
 				//Debug
 				/*System.out.println(firstName);
 				System.out.println(lastName);
@@ -240,6 +249,26 @@ public class CreateAccPanel extends JPanel {
 				System.out.println(password);
 				System.out.println(confirmPass);*/
 			 }
+		});
+
+		cancelButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//Clear inputs
+				firstNameField.setText("");
+				lastNameField.setText("");
+				StateField.setSelectedIndex(0);
+				phoneNumField1.setText(""); 
+				phoneNumField2.setText(""); 
+				phoneNumField3.setText("");
+				emailField.setText("");
+				taxIdField.setText("");
+				usernameField.setText("");
+				passwordField.setText("");
+				confirmPasswordField.setText("");
+
+				CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
+				c.show(MainWindow.mainPanel, MainWindow.LOGIN_PANEL);
+			}
 		});
 
 		//Add components
@@ -265,6 +294,7 @@ public class CreateAccPanel extends JPanel {
 		this.add(confirmPasswordLabel);
 		this.add(confirmPasswordField);
 		this.add(createAccButton);
+		this.add(cancelButton);
 		this.add(errorMessage);
 
 
@@ -329,6 +359,11 @@ public class CreateAccPanel extends JPanel {
 		} else {
 			return false;
 		}
+	}
+
+	public boolean createUser(firstname, lastname, phoneNum, email, taxID, username, password){
+		//TODO: Implement with mySQL connection
+		return true;
 	}
 
 }

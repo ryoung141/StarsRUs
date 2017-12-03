@@ -47,7 +47,7 @@ public class LoginPanel extends JPanel {
 		createAccButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
-				c.show(MainWindow.mainPanel, "Create Acc");
+				c.show(MainWindow.mainPanel, MainWindow.CREATE_ACC_PANEL);
 			}
 		});
 

@@ -7,6 +7,8 @@ public class MainWindow {
 
 	private JFrame frame;
 	public static JPanel mainPanel;
+	public static final String LOGIN_PANEL = "Login Screen";
+	public static final String CREATE_ACC_PANEL = "Create account";
 
 	public MainWindow() {
 
@@ -18,8 +20,8 @@ public class MainWindow {
 		JPanel card1 = new LoginPanel();
 		JPanel card2 = new CreateAccPanel();
 
-		mainPanel.add(card1, "Login");
-		mainPanel.add(card2, "Create Acc");
+		mainPanel.add(card1, LOGIN_PANEL);
+		mainPanel.add(card2, CREATE_ACC_PANEL);
 
 		frame.add(mainPanel);
 
