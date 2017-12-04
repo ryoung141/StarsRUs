@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.regex.*;
 import java.util.ArrayList;
 
-public class BuyTransactionPanel extends JPanel{
+public class SellTransactionPanel extends JPanel{
 	private JLabel titleLabel;
 	private JLabel currentPriceLabel;
 	private JLabel amountLabel;
 	private JTextField amountField;
-	private JButton buyButton;
+	private JButton sellButton;
 	private JLabel errMsgLabel;
 	private JButton cancelButton;
 	private JLabel confirmMsgLabel;
@@ -24,7 +24,7 @@ public class BuyTransactionPanel extends JPanel{
 	public static final String TRANSACTION_PANEL = "Transaction Panel";
 	public static final String CONFIRMATION_PANEL = "Confirm Panel";
 
-	public BuyTransactionPanel(Stock s){
+	public SellTransactionPanel(Stock s){
 		this.stock = s;
 		this.setLayout(new CardLayout());
 		this.setBackground(Color.BLUE);
@@ -36,7 +36,7 @@ public class BuyTransactionPanel extends JPanel{
 		transactionPanel.setLayout(null);
 
 		//Styling
-		titleLabel = new JLabel("Buy " + stock.getSymbol());
+		titleLabel = new JLabel("Sell " + stock.getSymbol());
 		titleLabel.setBounds(90, 25, 100, 50);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setFont(titleLabel.getFont().deriveFont(20.0f));
@@ -54,8 +54,8 @@ public class BuyTransactionPanel extends JPanel{
 		amountField = new JTextField();
 		amountField.setBounds(150, 90, 40, 25);
 
-		buyButton = new JButton("BUY");
-		buyButton.setBounds(50, 125, 80, 35);
+		sellButton = new JButton("SELL");
+		sellButton.setBounds(50, 125, 80, 35);
 
 		cancelButton = new JButton("CANCEL");
 		cancelButton.setBounds(150, 125, 80, 35);
@@ -66,7 +66,7 @@ public class BuyTransactionPanel extends JPanel{
 		errMsgLabel.setFont(errMsgLabel.getFont().deriveFont(12.0f));
 
 		//Event listeners
-		buyButton.addActionListener(new ActionListener(){
+		sellButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String amountString = amountField.getText();
 				errMsgLabel.setText("");
@@ -74,8 +74,8 @@ public class BuyTransactionPanel extends JPanel{
 					amount = Integer.parseInt(amountField.getText());
 					total = amount * stock.getCurrentPrice();
 					changeConfirmDetail();
-					CardLayout c = (CardLayout) (StockDetailPanel.buyTransactionPanel.getLayout());
-					c.show(StockDetailPanel.buyTransactionPanel, CONFIRMATION_PANEL);
+					CardLayout c = (CardLayout) (StockDetailPanel.sellTransactionPanel.getLayout());
+					c.show(StockDetailPanel.sellTransactionPanel, CONFIRMATION_PANEL);
 				} else {
 					errMsgLabel.setText("Error: Invalid input");
 				}
@@ -84,7 +84,7 @@ public class BuyTransactionPanel extends JPanel{
 
 		cancelButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				StockDetailPanel.buyDialog.setVisible(false);
+				StockDetailPanel.sellDialog.setVisible(false);
 			}
 		});
 
@@ -93,7 +93,7 @@ public class BuyTransactionPanel extends JPanel{
 		transactionPanel.add(currentPriceLabel);
 		transactionPanel.add(amountLabel);
 		transactionPanel.add(amountField);
-		transactionPanel.add(buyButton);
+		transactionPanel.add(sellButton);
 		transactionPanel.add(cancelButton);
 		transactionPanel.add(errMsgLabel);
 
@@ -106,7 +106,7 @@ public class BuyTransactionPanel extends JPanel{
 		confirmPanel.setLayout(null);
 
 		//Styling
-		confirmMsgLabel = new JLabel("Buy " 
+		confirmMsgLabel = new JLabel("Sell " 
 			+ Integer.toString(amount) 
 			+ " " + stock.getSymbol()
 			+ " for "
@@ -125,8 +125,8 @@ public class BuyTransactionPanel extends JPanel{
 		//Event listeners
 		confirmButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(buyStock()){
-					errMsgLabel.setText("Bought " 
+				if(sellStock()){
+					errMsgLabel.setText("Sold " 
 						+ Integer.toString(amount) 
 						+ " " + stock.getSymbol()
 						+ " for "
@@ -134,17 +134,17 @@ public class BuyTransactionPanel extends JPanel{
 						);
 					StockListPanel.stockDetailPanel.changeDetail(stock);
 				} else {
-					errMsgLabel.setText("Error: Could not buy");
+					errMsgLabel.setText("Error: Could not sell");
 				}
-				CardLayout c = (CardLayout) (StockDetailPanel.buyTransactionPanel.getLayout());
-				c.show(StockDetailPanel.buyTransactionPanel, TRANSACTION_PANEL);
+				CardLayout c = (CardLayout) (StockDetailPanel.sellTransactionPanel.getLayout());
+				c.show(StockDetailPanel.sellTransactionPanel, TRANSACTION_PANEL);
 			}
 		});
 
 		confirmCancelButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				CardLayout c = (CardLayout) (StockDetailPanel.buyTransactionPanel.getLayout());
-				c.show(StockDetailPanel.buyTransactionPanel, TRANSACTION_PANEL);
+				CardLayout c = (CardLayout) (StockDetailPanel.sellTransactionPanel.getLayout());
+				c.show(StockDetailPanel.sellTransactionPanel, TRANSACTION_PANEL);
 			}
 		});
 
@@ -164,14 +164,14 @@ public class BuyTransactionPanel extends JPanel{
 
 	public void changeDetails(Stock s){
 		this.stock = s;
-		titleLabel.setText("Buy " + this.stock.getSymbol());
+		titleLabel.setText("Sell " + this.stock.getSymbol());
 		currentPriceLabel.setText("Current Price: $" + Double.toString(this.stock.getCurrentPrice()));
 		errMsgLabel.setText("");
 		amountField.setText("");
 	}
 
 	public void changeConfirmDetail(){
-		confirmMsgLabel.setText("Buy " 
+		confirmMsgLabel.setText("Sell " 
 			+ Integer.toString(amount) 
 			+ " " + this.stock.getSymbol()
 			+ " for "
@@ -192,8 +192,8 @@ public class BuyTransactionPanel extends JPanel{
 		}
 	}
 
-	public boolean buyStock(){
-		//TODO: Buy stock function
+	public boolean sellStock(){
+		//TODO: Sell stock function
 		return true;
 	}
 }

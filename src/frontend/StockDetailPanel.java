@@ -17,6 +17,9 @@ public class StockDetailPanel extends JPanel{
 	public static JDialog buyDialog;
 	public static BuyTransactionPanel buyTransactionPanel;
 
+	public static JDialog sellDialog;
+	public static SellTransactionPanel sellTransactionPanel;
+
 	public StockDetailPanel(){
 		//JPanel characteristics
 		this.setLayout(null);
@@ -61,6 +64,10 @@ public class StockDetailPanel extends JPanel{
 		buyDialog.setSize(300, 250);
 		buyDialog.setVisible(false);
 
+		sellDialog = new JDialog();
+		sellDialog.setSize(300, 250);
+		sellDialog.setVisible(false);
+
 		//Event listeners
 		buyButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -71,6 +78,18 @@ public class StockDetailPanel extends JPanel{
 					buyTransactionPanel.changeDetails(stock);
 				}
 				buyDialog.setVisible(true);
+			}
+		});
+
+		sellButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(sellTransactionPanel == null){
+					sellTransactionPanel = new SellTransactionPanel(stock);
+					sellDialog.add(sellTransactionPanel);
+				} else {
+					sellTransactionPanel.changeDetails(stock);
+				}
+				sellDialog.setVisible(true);
 			}
 		});
 
@@ -92,7 +111,7 @@ public class StockDetailPanel extends JPanel{
 
 	public int getOwned(Stock s){
 		//TODO: Get amount of stocks owned as int
-		return 767;
+		return owned;
 	}
 
 	public void setSymbolLabel(String symbol){
