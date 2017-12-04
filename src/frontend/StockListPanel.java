@@ -65,8 +65,6 @@ public class StockListPanel extends JPanel{
 		stockDetailPanel = new StockDetailPanel();
 		stockDetailPanel.setBounds(0, base + 175, 400, 800 - (base + 175));
 
-		
-
 		//Event listeners
 		stockList.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {
@@ -74,6 +72,7 @@ public class StockListPanel extends JPanel{
 				if(selectedItem != null){
 					Stock s = stocksMap.get(selectedItem);
 					stockDetailPanel.changeDetail(s);
+					stockDetailPanel.makeVisible();
 				}
 			}
 		});
@@ -85,6 +84,7 @@ public class StockListPanel extends JPanel{
 					if(selectedItem != null){
 						Stock s = stocksMap.get(selectedItem);
 						stockDetailPanel.changeDetail(s);
+						stockDetailPanel.makeVisible();
 					}
 				}
 			}

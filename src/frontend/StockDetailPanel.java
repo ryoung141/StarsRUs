@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class StockDetailPanel extends JPanel{
+	private Stock stock;
 	private JLabel stockSymbolLabel;
 	private JLabel nameLabel;
 	private JLabel dailyClosingPriceLabel;
@@ -12,6 +13,9 @@ public class StockDetailPanel extends JPanel{
 	private JLabel amountOwnLabel;
 	private JButton buyButton;
 	private JButton sellButton;
+
+	public static JDialog buyDialog;
+	public static BuyTransactionPanel buyTransactionPanel;
 
 	public StockDetailPanel(){
 		//JPanel characteristics
@@ -40,18 +44,35 @@ public class StockDetailPanel extends JPanel{
 		currentPriceLabel.setHorizontalAlignment(JLabel.CENTER);
 		currentPriceLabel.setFont(currentPriceLabel.getFont().deriveFont(12.0f));
 
-		amountOwnLabel = new JLabel("Stocks Owned: 123");
+		amountOwnLabel = new JLabel("");
 		amountOwnLabel.setBounds(100, base + 150, 200, 50);
 		amountOwnLabel.setHorizontalAlignment(JLabel.CENTER);
 		amountOwnLabel.setFont(currentPriceLabel.getFont().deriveFont(12.0f));
 
 		buyButton = new JButton("BUY");
 		buyButton.setBounds(100, base + 200, 90, 50);
+		buyButton.setVisible(false);
 
 		sellButton = new JButton("SELL");
 		sellButton.setBounds(210, base + 200, 90, 50);
+		sellButton.setVisible(false);
+
+		buyDialog = new JDialog();
+		buyDialog.setSize(300, 250);
+		buyDialog.setVisible(false);
 
 		//Event listeners
+		buyButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(buyTransactionPanel == null){
+					buyTransactionPanel = new BuyTransactionPanel(stock);
+					buyDialog.add(buyTransactionPanel);
+				} else {
+					buyTransactionPanel.changeDetails(stock);
+				}
+				buyDialog.setVisible(true);
+			}
+		});
 
 		//Add components
 		this.add(stockSymbolLabel);
@@ -61,6 +82,17 @@ public class StockDetailPanel extends JPanel{
 		this.add(amountOwnLabel);
 		this.add(buyButton);
 		this.add(sellButton);
+
+	}
+
+	public void makeVisible(){
+		buyButton.setVisible(true);
+		sellButton.setVisible(true);
+	}
+
+	public int getOwned(Stock s){
+		//TODO: Get amount of stocks owned as int
+		return 767;
 	}
 
 	public void setSymbolLabel(String symbol){
@@ -85,10 +117,19 @@ public class StockDetailPanel extends JPanel{
 			);
 	}
 
+	public void setAmountOwnedLabel(int owned){
+		amountOwnLabel.setText(
+			"Stocks Owned: " 
+			+ Integer.toString(owned)
+			);
+	}
+
 	public void changeDetail(Stock s){
+		this.stock = s;
 		setSymbolLabel(s.getSymbol());
 		setNameLabel(s.getName());
 		setDailyClosingPriceLabel(s.getDailyClosingPrice());
 		setCurrentPriceLabel(s.getCurrentPrice());
+		setAmountOwnedLabel(getOwned(s));
 	}
 }
