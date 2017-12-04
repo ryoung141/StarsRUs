@@ -57,4 +57,15 @@ class stockAccountHandle extends accountHandle
 
 		}catch(Exception e){System.out.println(e);}
 	}
+
+	public String getStock(int s_id)
+	{
+		try
+		{
+			stock s = new stock(s_id);
+			return s.stock_symbol;
+
+		}catch(Exception e){System.out.println(e);}
+		return "false";
+	}
 }
