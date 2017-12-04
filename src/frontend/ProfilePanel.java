@@ -72,4 +72,20 @@ public class ProfilePanel extends JPanel{
 		this.stock = s;
 	}
 
+	public void setSymbol(String symbol){
+		stockSymbolLabel.setText("Stock Symbol: " + symbol);
+	}
+
+	public void setName(String name){
+		nameLabel.setText("Name: " + name);
+	}
+
+	public void setBirth(String dob){
+		birthLabel.setText("Date of Birth: " + dob);
+	}
+
+	public void getContracts(){
+		//TODO: Implement contracts
+		return;
+	}
 }
