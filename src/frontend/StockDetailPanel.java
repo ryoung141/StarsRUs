@@ -13,12 +13,16 @@ public class StockDetailPanel extends JPanel{
 	private JLabel amountOwnLabel;
 	private JButton buyButton;
 	private JButton sellButton;
+	private JButton profileButton;
 
 	public static JDialog buyDialog;
 	public static BuyTransactionPanel buyTransactionPanel;
 
 	public static JDialog sellDialog;
 	public static SellTransactionPanel sellTransactionPanel;
+
+	public static JDialog profileDialog;
+	public static ProfilePanel profilePanel;
 
 	public StockDetailPanel(){
 		//JPanel characteristics
@@ -37,13 +41,17 @@ public class StockDetailPanel extends JPanel{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(16.0f));
 
+		profileButton = new JButton("PROFILE");
+		profileButton.setBounds(150, base + 70, 100, 30);
+		profileButton.setVisible(false);
+
 		dailyClosingPriceLabel = new JLabel("");
-		dailyClosingPriceLabel.setBounds(100, base + 50, 200, 50);
+		dailyClosingPriceLabel.setBounds(100, base + 100, 200, 50);
 		dailyClosingPriceLabel.setHorizontalAlignment(JLabel.CENTER);
 		dailyClosingPriceLabel.setFont(dailyClosingPriceLabel.getFont().deriveFont(12.0f));
 
 		currentPriceLabel = new JLabel("");
-		currentPriceLabel.setBounds(100, base + 70, 200, 50);
+		currentPriceLabel.setBounds(100, base + 120, 200, 50);
 		currentPriceLabel.setHorizontalAlignment(JLabel.CENTER);
 		currentPriceLabel.setFont(currentPriceLabel.getFont().deriveFont(12.0f));
 
@@ -67,6 +75,10 @@ public class StockDetailPanel extends JPanel{
 		sellDialog = new JDialog();
 		sellDialog.setSize(300, 250);
 		sellDialog.setVisible(false);
+
+		profileDialog = new JDialog();
+		profileDialog.setSize(400, 500);
+		profileDialog.setVisible(false);
 
 		//Event listeners
 		buyButton.addActionListener(new ActionListener(){
@@ -93,6 +105,18 @@ public class StockDetailPanel extends JPanel{
 			}
 		});
 
+		profileButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(profilePanel == null){
+					profilePanel = new ProfilePanel(stock);
+					profileDialog.add(profilePanel);
+				} else {
+					profilePanel.changeDetails(stock);
+				}
+				profileDialog.setVisible(true);
+			}
+		});
+
 		//Add components
 		this.add(stockSymbolLabel);
 		this.add(nameLabel);
@@ -101,17 +125,19 @@ public class StockDetailPanel extends JPanel{
 		this.add(amountOwnLabel);
 		this.add(buyButton);
 		this.add(sellButton);
+		this.add(profileButton);
 
 	}
 
 	public void makeVisible(){
 		buyButton.setVisible(true);
 		sellButton.setVisible(true);
+		profileButton.setVisible(true);
 	}
 
 	public int getOwned(Stock s){
 		//TODO: Get amount of stocks owned as int
-		return owned;
+		return 797;
 	}
 
 	public void setSymbolLabel(String symbol){
