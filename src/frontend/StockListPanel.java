@@ -10,7 +10,7 @@ public class StockListPanel extends JPanel{
 	private JLabel title;
 	private JList stockList;
 	private JScrollPane scrollContainer;
-	private JPanel stockDetailPanel;
+	public static StockDetailPanel stockDetailPanel;
 
 	Stock stock1;
 	Stock stock2;
@@ -65,12 +65,15 @@ public class StockListPanel extends JPanel{
 		stockDetailPanel = new StockDetailPanel();
 		stockDetailPanel.setBounds(0, base + 175, 400, 800 - (base + 175));
 
+		
+
 		//Event listeners
 		stockList.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {
 				String selectedItem = (String) stockList.getSelectedValue();
 				if(selectedItem != null){
-					System.out.println(selectedItem);
+					Stock s = stocksMap.get(selectedItem);
+					stockDetailPanel.changeDetail(s);
 				}
 			}
 		});
@@ -80,7 +83,8 @@ public class StockListPanel extends JPanel{
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					String selectedItem = (String) stockList.getSelectedValue();
 					if(selectedItem != null){
-						System.out.println(selectedItem);
+						Stock s = stocksMap.get(selectedItem);
+						stockDetailPanel.changeDetail(s);
 					}
 				}
 			}
@@ -94,7 +98,7 @@ public class StockListPanel extends JPanel{
 
 	public void addStock(Stock s){
 		stocks.add(s.getSymbol());
-		stocksMap.put(s.getName(), s);
+		stocksMap.put(s.getSymbol(), s);
 		return;
 	}
 }

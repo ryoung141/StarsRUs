@@ -34,7 +34,7 @@ public class Stock {
 		return;
 	}
 
-	public double getDailyClosingPrice(double p){
+	public double getDailyClosingPrice(){
 		return this.dailyClosingPrice;
 	}
 

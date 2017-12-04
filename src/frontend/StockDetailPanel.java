@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class StockDetailPanel extends JPanel{
 	private JLabel stockSymbolLabel;
 	private JLabel nameLabel;
-	private JLabel closingPriceLabel;
+	private JLabel dailyClosingPriceLabel;
 	private JLabel currentPriceLabel;
 	private JLabel amountOwnLabel;
 	private JButton buyButton;
@@ -20,22 +20,22 @@ public class StockDetailPanel extends JPanel{
 
 		//Styling
 		int base = 50;
-		stockSymbolLabel = new JLabel("STA");
+		stockSymbolLabel = new JLabel("");
 		stockSymbolLabel.setBounds(100, base, 200, 50);
 		stockSymbolLabel.setHorizontalAlignment(JLabel.CENTER);
 		stockSymbolLabel.setFont(stockSymbolLabel.getFont().deriveFont(24.0f));
 
-		nameLabel = new JLabel("Sandy Tarrel");
+		nameLabel = new JLabel("");
 		nameLabel.setBounds(100, base + 20, 200, 50);
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(16.0f));
 
-		closingPriceLabel = new JLabel("Daily Closing Price: $2302.32");
-		closingPriceLabel.setBounds(100, base + 50, 200, 50);
-		closingPriceLabel.setHorizontalAlignment(JLabel.CENTER);
-		closingPriceLabel.setFont(closingPriceLabel.getFont().deriveFont(12.0f));
+		dailyClosingPriceLabel = new JLabel("");
+		dailyClosingPriceLabel.setBounds(100, base + 50, 200, 50);
+		dailyClosingPriceLabel.setHorizontalAlignment(JLabel.CENTER);
+		dailyClosingPriceLabel.setFont(dailyClosingPriceLabel.getFont().deriveFont(12.0f));
 
-		currentPriceLabel = new JLabel("Current Price: $2302.32");
+		currentPriceLabel = new JLabel("");
 		currentPriceLabel.setBounds(100, base + 70, 200, 50);
 		currentPriceLabel.setHorizontalAlignment(JLabel.CENTER);
 		currentPriceLabel.setFont(currentPriceLabel.getFont().deriveFont(12.0f));
@@ -56,10 +56,39 @@ public class StockDetailPanel extends JPanel{
 		//Add components
 		this.add(stockSymbolLabel);
 		this.add(nameLabel);
-		this.add(closingPriceLabel);
+		this.add(dailyClosingPriceLabel);
 		this.add(currentPriceLabel);
 		this.add(amountOwnLabel);
 		this.add(buyButton);
 		this.add(sellButton);
+	}
+
+	public void setSymbolLabel(String symbol){
+		stockSymbolLabel.setText(symbol);
+	}
+
+	public void setNameLabel(String name){
+		nameLabel.setText(name);
+	}
+
+	public void setDailyClosingPriceLabel(double dailyClosingPrice){
+		dailyClosingPriceLabel.setText(
+			"Daily Closing Price: $"
+			+ Double.toString(dailyClosingPrice)
+			);
+	}
+
+	public void setCurrentPriceLabel(double currentPrice){
+		currentPriceLabel.setText(
+			"Current Price: $" 
+			+ Double.toString(currentPrice)
+			);
+	}
+
+	public void changeDetail(Stock s){
+		setSymbolLabel(s.getSymbol());
+		setNameLabel(s.getName());
+		setDailyClosingPriceLabel(s.getDailyClosingPrice());
+		setCurrentPriceLabel(s.getCurrentPrice());
 	}
 }
