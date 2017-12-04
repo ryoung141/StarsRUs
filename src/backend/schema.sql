@@ -47,9 +47,11 @@ CREATE TABLE market_account(
 	);
 
 CREATE TABLE stock_account(
-	a_id int(100) NOT NULL PRIMARY KEY,
+	a_id int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	master_id int(100) NOT NULL,
+	s_id int(100) NOT NULL,
 	balance FLOAT(13, 3),
-	FOREIGN KEY (a_id)
+	FOREIGN KEY (master_id)
 		REFERENCES account(a_id)
 		ON UPDATE CASCADE ON DELETE CASCADE
 	);
@@ -99,7 +101,6 @@ CREATE TABLE sell (
 
 CREATE TABLE accrue_interest (
   	t_id int(100) NOT NULL PRIMARY KEY,
-  	s_id int(100) NOT NULL,
   	rate float(7, 3) NOT NULL,
   	avg_daily_balance float(13, 3) NOT NULL,
   	FOREIGN KEY (t_id)
@@ -147,5 +148,5 @@ ALTER TABLE buy
 ALTER TABLE sell
 	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
 
-ALTER TABLE accrue_interest
-	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
+ALTER TABLE stock_account
+	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON UPDATE CASCADE;
