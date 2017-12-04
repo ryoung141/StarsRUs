@@ -101,7 +101,6 @@ CREATE TABLE sell (
 
 CREATE TABLE accrue_interest (
   	t_id int(100) NOT NULL PRIMARY KEY,
-  	s_id int(100) NOT NULL,
   	rate float(7, 3) NOT NULL,
   	avg_daily_balance float(13, 3) NOT NULL,
   	FOREIGN KEY (t_id)
@@ -147,9 +146,6 @@ ALTER TABLE buy
 	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
 
 ALTER TABLE sell
-	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
-
-ALTER TABLE accrue_interest
 	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
 
 ALTER TABLE stock_account

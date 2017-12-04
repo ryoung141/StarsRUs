@@ -119,5 +119,13 @@ class profileHandle extends item
 		System.out.println(c.total_value);
 		System.out.println(c.role);
 		System.out.println(c.year_released);
+
+		transaction t = new transaction(1);
+		System.out.println(t.date);
+		System.out.println(t.a_id);
+
+		t.getAllTransactions(t.a_id);
+
+		System.out.println(t.depositList.get(0).amount);
 	}
 }
