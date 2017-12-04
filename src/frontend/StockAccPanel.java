@@ -17,6 +17,8 @@ public class StockAccPanel extends AccountPanel{
 		accountsComboBox.setBounds(125, 25, 150, 25);
 		setComboBox();
 
+		
+
 		//Event listeners
 		accountsComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

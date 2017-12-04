@@ -6,7 +6,7 @@ import javax.swing.*;
 public class TraderInterfacePanel extends JPanel{
 	//Define components
 	public static JPanel accManagerPanel;
-	public static JPanel rightPanel;
+	public static JPanel stockManagerPanel;
 
 	public TraderInterfacePanel() {
 		//JPanel characteristics
@@ -14,12 +14,12 @@ public class TraderInterfacePanel extends JPanel{
 
 		//Define different panels
 		accManagerPanel = new AccManagerPanel();
-		rightPanel = new JPanel();
-		rightPanel.setBackground(Color.GREEN);
+
+		stockManagerPanel = new StockManagerPanel();
 
 		//Add components
 		this.add(accManagerPanel);
-		this.add(rightPanel);
+		this.add(stockManagerPanel);
 		
 	}	
 }
