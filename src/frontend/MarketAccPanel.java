@@ -32,13 +32,13 @@ public class MarketAccPanel extends AccountPanel{
 		setComboBox();
 
 		titleLabel = new JLabel("Market Account");
-		titleLabel.setBounds(100, base, 200, 25);
+		titleLabel.setBounds(100, base + 100, 200, 25);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setFont(titleLabel.getFont().deriveFont(24.0f));
 
 		balanceLabel = new JLabel("Unitialized");
 		setBalance(getBalance().get("dollars"), getBalance().get("cents"));
-		balanceLabel.setBounds(100, base + 150, 200, 25);
+		balanceLabel.setBounds(100, base + 200, 200, 25);
 		balanceLabel.setHorizontalAlignment(JLabel.CENTER);
 		balanceLabel.setFont(balanceLabel.getFont().deriveFont(16.0f));
 
