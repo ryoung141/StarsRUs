@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class StockAccPanel extends AccountPanel{
 	//Define components
-	public JComboBox accountsComboBox;
+	private JComboBox accountsComboBox;
 
 	public StockAccPanel() {
 		//JPanel characteristics
@@ -14,8 +14,8 @@ public class StockAccPanel extends AccountPanel{
 
 		//Styling
 		accountsComboBox = new JComboBox(AccManagerPanel.accounts);
-		setComboBox();
 		accountsComboBox.setBounds(125, 25, 150, 25);
+		setComboBox();
 
 		//Event listeners
 		accountsComboBox.addActionListener(new ActionListener(){
