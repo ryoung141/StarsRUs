@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.*;
 import java.util.ArrayList;
 
@@ -10,6 +11,12 @@ public class MovieDetailPanel extends JPanel{
 	private JLabel titleLabel;
 	private JLabel movieTitleLabel;
 	private JLabel prodcutionYearLabel;
+	private JLabel reviewLabel;
+	private JList reviewList;
+	private JScrollPane scrollContainer;
+	private DefaultListModel listModel;
+
+	private ArrayList<String> reviews = new ArrayList<String>();
 
 	public MovieDetailPanel(){
 		this.setLayout(null);
@@ -32,18 +39,41 @@ public class MovieDetailPanel extends JPanel{
 		prodcutionYearLabel.setHorizontalAlignment(JLabel.CENTER);
 		prodcutionYearLabel.setFont(prodcutionYearLabel.getFont().deriveFont(12.0f));
 
+		reviewLabel = new JLabel("Reviews");
+		reviewLabel.setBounds(100, base + 110, 200, 25);
+		reviewLabel.setHorizontalAlignment(JLabel.CENTER);
+		reviewLabel.setFont(reviewLabel.getFont().deriveFont(14.0f));
+
+		listModel = new DefaultListModel();
+		reviewList = new JList(listModel);
+		scrollContainer = new JScrollPane(reviewList);
+		scrollContainer.setBounds(50, base + 140, 300, 100);
+		scrollContainer.setVerticalScrollBar(new JScrollBar());
+
 		//Event listeners
 
 		//Add components
 		this.add(titleLabel);
 		this.add(movieTitleLabel);
 		this.add(prodcutionYearLabel);
+		this.add(reviewLabel);
+		this.add(scrollContainer);
+	}
+
+	public void updateList(){
+		listModel.removeAllElements();
+		for(String r: reviews) {
+			System.out.println(r);
+			listModel.addElement(r);
+		}
 	}
 
 	public void changeDetail(Movie m){
 		this.movie = m;
 		setMovieTitle(m.getMovieTitle());
 		setProductionYear(m.getProductionYear());
+		setReviews(m.getReviews());
+		updateList();
 	}
 
 	public void setMovieTitle(String movieTitle){
@@ -52,6 +82,16 @@ public class MovieDetailPanel extends JPanel{
 
 	public void setProductionYear(int year){
 		prodcutionYearLabel.setText("Role: " + year);
+	}
+
+	public void setReviews(HashMap<String, String> revs) {
+		ArrayList<String> r = new ArrayList<String>();
+		for(Map.Entry<String, String> entry : revs.entrySet()) {
+			String review = entry.getKey() + " - " + entry.getValue();
+			r.add(review);
+		}
+		reviews = r;
+		updateList();
 	}
 
 }
