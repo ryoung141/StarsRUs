@@ -22,9 +22,15 @@ public class UserController extends Controller
 
 	public boolean createUser(String firstname, String lastname, String phonenumber, String email, int taxID, String username, String password, String state)
 	{
-		profileHandle ph = new profileHandle();
-		ph.create(firstname, lastname, phonenumber, email, taxID, username, password, state);
-		
+		this.ph = new profileHandle();
+		boolean ret = ph.create(firstname, lastname, phonenumber, email, taxID, username, password, state);
+
+		return ret;
+	}
+
+	public int getID()
+	{
+		return this.ph.id;
 	}
 
 }

@@ -90,11 +90,11 @@ public class profileHandle extends item
 			this.openConnection();
 			Statement stmt = this.con.createStatement();
 			String query = "INSERT INTO customer_profile(tax_id, username, password, firstname, lastname, state, phonenumber, email) VALUES (";
-			query = query + taxID + "," + username + "," + password + "," + firstname + "," + lastname + "," + state + "," + phonenumber + "," + email + ")";
-			ResultSet rs = stmt.executeQuery(query);
+			query = query + taxID + ", '" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + state + "', '" + phonenumber + "', '" + email + "')";
+			int results = stmt.executeUpdate(query);
 
 			this.closeConnection();
-			if(rs.next())
+			if(results > 0)
 			{
 				return true;
 			}

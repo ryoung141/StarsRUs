@@ -31,19 +31,19 @@ public class marketAccountHandle extends accountHandle
 		{
 			this.openConnection();
 			String query = "INSERT INTO depost(amount) VALUES ("+amount+")";
-			Statment stmt = this.con.createStatement();
+			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
 			if(rs.next())
 			{
-				continue;
+				//
 			}
 			else
 			{
-				break;
+				//eak;
 			}
 
-			String query = ""
+			query = "";
 
 			this.closeConnection();
 		}catch(Exception e){System.out.println(e);}
