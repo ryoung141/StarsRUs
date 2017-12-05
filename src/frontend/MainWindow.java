@@ -11,6 +11,11 @@ public class MainWindow {
 	public static final String CREATE_ACC_PANEL = "Create account";
 	public static final String TRADER_INTERFACE = "Trader interface";
 
+	public static JMenuBar menuBar;
+	public static JMenu moviesMenu;
+	public static JMenu logOutMenu;
+
+
 	public MainWindow() {
 
 		//Instantiate Frame
@@ -33,7 +38,26 @@ public class MainWindow {
 		frame.setTitle("StarsRus");
 		frame.setSize(800, 600);
 		frame.setVisible(true);
+
+		//MenuBar setup
+		menuBar = new JMenuBar();
+		moviesMenu = new JMenu("Options");
+
+		logOutMenu = new JMenu("Log Out");
+		menuBar.add(moviesMenu);
+		menuBar.add(logOutMenu);
+
+		frame.setJMenuBar(menuBar);
+		showMenu();
 	}	
+
+	public static void hideMenu(){
+		menuBar.setVisible(false);
+	}
+
+	public static void showMenu(){
+		menuBar.setVisible(true);
+	}
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
