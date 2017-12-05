@@ -8,7 +8,7 @@ public class item
 	static final String USER = "richard_young";
 	static final String PASS = "113";
 	Connection con;
-	int id;
+	public int id;
 
 	public item()
 	{

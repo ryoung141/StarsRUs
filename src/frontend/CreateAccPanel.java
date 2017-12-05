@@ -384,9 +384,11 @@ public class CreateAccPanel extends JPanel {
 		}
 	}
 
-	public boolean createUser(String firstName, String lastName, String phoneNum, String email, String taxID, String username, String password){
-		//TODO: Implement with mySQL connection
-		return true;
+	public boolean createUser(String firstName, String lastName, String phoneNum, String email, String taxID, String username, String password, String state){
+		UserController u = new UserController();
+		boolean ret = u.createUser(firstName, lastName, phoneNum, email, taxID, username, password, state);
+
+		return ret;
 	}
 
 }

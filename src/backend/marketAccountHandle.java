@@ -24,4 +24,30 @@ public class marketAccountHandle extends accountHandle
 
 		}catch(Exception e){System.out.println(e);}
 	}
+
+	public boolean makeDeposit(int amount)
+	{
+		try
+		{
+			this.openConnection();
+			String query = "INSERT INTO depost(amount) VALUES ("+amount+")";
+			Statment stmt = this.con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next())
+			{
+				continue;
+			}
+			else
+			{
+				break;
+			}
+
+			String query = ""
+
+			this.closeConnection();
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
+	}
 }
