@@ -14,12 +14,15 @@ public class ProfilePanel extends JPanel{
 	private JLabel contractsLabel;
 	private JList contractsList;
 	private JScrollPane scrollContainer;
+	private DefaultListModel listModel;
 
 	public static ArrayList<String> contracts = new ArrayList<String>();
 	public static HashMap<String, MovieContract> contractsMap = new HashMap<String, MovieContract>();
 	public static MovieContractDetailPanel movieContractDetailPanel;
 
 	public ProfilePanel(Person person){
+		
+
 		this.person = person;
 		this.setLayout(null);
 
@@ -49,7 +52,9 @@ public class ProfilePanel extends JPanel{
 		contractsLabel.setHorizontalAlignment(JLabel.CENTER);
 		contractsLabel.setFont(contractsLabel.getFont().deriveFont(12.0f));
 
-		contractsList = new JList(contracts.toArray());
+		listModel = new DefaultListModel();
+		updateList();
+		contractsList = new JList(listModel);
 		scrollContainer = new JScrollPane(contractsList);
 		scrollContainer.setBounds(50, 200, 300, 70);
 		scrollContainer.setVerticalScrollBar(new JScrollBar());
@@ -77,7 +82,19 @@ public class ProfilePanel extends JPanel{
 		setStockSymbol(p.getStockSymbol());
 		setName(p.getName());
 		setBirth(p.getDateOfBirth());
-		//setMovieContracts(p.getMovieContracts());
+		setMovieContracts(p.getMovieContracts());
+		updateList();
+		System.out.println("-------------");
+		for(String c: contracts) {
+			System.out.println(c);
+		}
+	}
+
+	public void updateList(){
+		listModel.removeAllElements();
+		for(String c: contracts) {
+			listModel.addElement(c);
+		}
 	}
 
 	public void setStockSymbol(String symbol){
@@ -93,10 +110,16 @@ public class ProfilePanel extends JPanel{
 	}
 
 	public void setMovieContracts(ArrayList<MovieContract> movieContracts){
+		ArrayList<String> c = new ArrayList<String>();
+		HashMap<String, MovieContract> cm = new HashMap<String, MovieContract>();
+
 		for (MovieContract mc: movieContracts) {
-			contracts.add(mc.movieTitle);
-			contractsMap.put(mc.movieTitle, mc);
+			c.add(mc.movieTitle);
+			cm.put(mc.movieTitle, mc);
 		}
+
+		contracts = c;
+		contractsMap = cm;
 	}
 
 }

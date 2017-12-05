@@ -9,6 +9,7 @@ public class Person {
 	private ArrayList<MovieContract> movieContracts;
 
 	public Person(String stockSymbol, String name, String dob){
+
 		this.stockSymbol = stockSymbol;
 		this.name = name;
 		this.dateOfBirth = dob;
@@ -45,6 +46,10 @@ public class Person {
 
 	public ArrayList<MovieContract> getMovieContracts(){
 		//TODO: Implement 
-		return new ArrayList<MovieContract>();
+		ArrayList<MovieContract> mc = new ArrayList<MovieContract>();
+		if(TraderInterfacePanel.movieContractsMap != null ){
+			mc = TraderInterfacePanel.movieContractsMap.get(this.name);
+		}
+		return mc;
 	}
 }
