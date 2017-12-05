@@ -6,7 +6,7 @@ import java.util.regex.*;
 import java.util.ArrayList;
 
 public class ProfilePanel extends JPanel{
-	private Stock stock;
+	private Person person;
 	private JLabel titleLabel;
 	private JLabel stockSymbolLabel;
 	private JLabel nameLabel;
@@ -15,11 +15,12 @@ public class ProfilePanel extends JPanel{
 	private JList contractsList;
 	private JScrollPane scrollContainer;
 
-	public static String[] contracts = {"Batman", "Ben10", "Transformers", "Harry Potter", "Ronnie and the Dweebs"};
+	public static ArrayList<String> contracts = new ArrayList<String>();
+	public static HashMap<String, MovieContract> contractsMap = new HashMap<String, MovieContract>();
 	public static MovieContractDetailPanel movieContractDetailPanel;
 
-	public ProfilePanel(Stock s){
-		this.stock = s;
+	public ProfilePanel(Person person){
+		this.person = person;
 		this.setLayout(null);
 
 		//Styling
@@ -28,17 +29,17 @@ public class ProfilePanel extends JPanel{
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setFont(titleLabel.getFont().deriveFont(20.0f));
 
-		stockSymbolLabel = new JLabel("Stock Symbol: ABA");
+		stockSymbolLabel = new JLabel("");
 		stockSymbolLabel.setBounds(100, 75, 200, 25);
 		stockSymbolLabel.setHorizontalAlignment(JLabel.CENTER);
 		stockSymbolLabel.setFont(stockSymbolLabel.getFont().deriveFont(12.0f));
 
-		nameLabel = new JLabel("Name: Abraham Ahana");
+		nameLabel = new JLabel("");
 		nameLabel.setBounds(100, 100, 200, 25);
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(12.0f));
 
-		birthLabel = new JLabel("Date of Birth: 01-23-98");
+		birthLabel = new JLabel("");
 		birthLabel.setBounds(100, 125, 200, 25);
 		birthLabel.setHorizontalAlignment(JLabel.CENTER);
 		birthLabel.setFont(birthLabel.getFont().deriveFont(12.0f));
@@ -48,7 +49,7 @@ public class ProfilePanel extends JPanel{
 		contractsLabel.setHorizontalAlignment(JLabel.CENTER);
 		contractsLabel.setFont(contractsLabel.getFont().deriveFont(12.0f));
 
-		contractsList = new JList(contracts);
+		contractsList = new JList(contracts.toArray());
 		scrollContainer = new JScrollPane(contractsList);
 		scrollContainer.setBounds(50, 200, 300, 70);
 		scrollContainer.setVerticalScrollBar(new JScrollBar());
@@ -57,6 +58,9 @@ public class ProfilePanel extends JPanel{
 		movieContractDetailPanel.setBounds(0, 300, 400, 200);
 
 		//Event listeners
+
+		//Initialize data
+		changeDetails(person);
 
 		//Add components
 		this.add(titleLabel);
@@ -68,11 +72,15 @@ public class ProfilePanel extends JPanel{
 		this.add(movieContractDetailPanel);
 	}
 
-	public void changeDetails(Stock s){
-		this.stock = s;
+	public void changeDetails(Person p){
+		this.person = p;
+		setStockSymbol(p.getStockSymbol());
+		setName(p.getName());
+		setBirth(p.getDateOfBirth());
+		//setMovieContracts(p.getMovieContracts());
 	}
 
-	public void setSymbol(String symbol){
+	public void setStockSymbol(String symbol){
 		stockSymbolLabel.setText("Stock Symbol: " + symbol);
 	}
 
@@ -84,8 +92,11 @@ public class ProfilePanel extends JPanel{
 		birthLabel.setText("Date of Birth: " + dob);
 	}
 
-	public void getContracts(){
-		//TODO: Implement contracts
-		return;
+	public void setMovieContracts(ArrayList<MovieContract> movieContracts){
+		for (MovieContract mc: movieContracts) {
+			contracts.add(mc.movieTitle);
+			contractsMap.put(mc.movieTitle, mc);
+		}
 	}
+
 }

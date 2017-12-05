@@ -8,6 +8,8 @@ public class TraderInterfacePanel extends JPanel{
 	public static JPanel accManagerPanel;
 	public static JPanel stockManagerPanel;
 
+	public static SampleData sampleData = new SampleData();
+
 	public TraderInterfacePanel() {
 		//JPanel characteristics
 		this.setLayout(new GridLayout(1,2));
