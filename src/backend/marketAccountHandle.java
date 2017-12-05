@@ -1,6 +1,7 @@
 
 
 import java.sql.*;
+import java.util.Date;
 
 public class marketAccountHandle extends accountHandle
 {
@@ -30,22 +31,44 @@ public class marketAccountHandle extends accountHandle
 		try
 		{
 			this.openConnection();
-			String query = "INSERT INTO depost(amount) VALUES ("+amount+")";
+			int new_balance = this.balance + amount;
+			String query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
 			Statement stmt = this.con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
+			int rs = stmt.executeUpdate(query);
 
-			if(rs.next())
+			if(rs > 0)
 			{
-				//
+				transaction t = new transaction();
+				boolean ret = t.makeTransaction(this.id, "deposit", amount);
+				return ret;
 			}
 			else
 			{
-				//eak;
+				return false;
 			}
+			
+		}catch(Exception e){System.out.println(e);}
 
-			query = "";
+		return false;
+	}
 
-			this.closeConnection();
+	public boolean makeWithdrawal(int amount)
+	{
+		try
+		{
+			this.openConnection();
+			int new_balance = this.balance - amount;
+			System.out.println(new_balance);
+			String query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+			System.out.println("broken here?");
+
+			transaction t = new transaction();
+			boolean ret = t.makeTransaction(this.id, "withdrawal", amount);
+
+			return ret;
+
 		}catch(Exception e){System.out.println(e);}
 
 		return false;

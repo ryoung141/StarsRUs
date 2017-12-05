@@ -53,4 +53,14 @@ public class accountHandle extends item
 		this.id = id;
 		this.owner = owner;
 	}
+
+	public marketAccountHandle getMarketAccount()
+	{
+		return new marketAccountHandle(this.id);
+	}
+
+	public String getOwner()
+	{
+		return this.owner;
+	}
 }

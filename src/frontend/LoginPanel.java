@@ -14,6 +14,7 @@ public class LoginPanel extends JPanel {
 	private JButton createAccButton;
 
 	public static int profile_id;
+	public static String username;
 
 	public LoginPanel() {
 		this.setLayout(null);
@@ -84,6 +85,7 @@ public class LoginPanel extends JPanel {
 		System.out.println(ret);
 
 		this.profile_id = u.getID();
+		this.username = u.getUsername();
 
 		return ret;
 	}

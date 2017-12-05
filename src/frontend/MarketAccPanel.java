@@ -93,7 +93,7 @@ public class MarketAccPanel extends AccountPanel{
 						}
 
 						if(amountReady){
-							if(depositMoney()){
+							if(depositMoney(amount)){
 								depositDiagErr.setText("$" + amount + " has been deposited!");
 								setBalance(getBalance().get("dollars"), getBalance().get("cents"));
 							} else {
@@ -149,7 +149,7 @@ public class MarketAccPanel extends AccountPanel{
 						}
 
 						if(amountReady){
-							if(WithdrawMoney()){
+							if(WithdrawMoney(amount)){
 								withdrawDiagErr.setText("$" + amount + " has been withdrawn!");
 								setBalance(getBalance().get("dollars"), getBalance().get("cents"));
 							} else {
@@ -217,13 +217,15 @@ public class MarketAccPanel extends AccountPanel{
 		}
 	}
 
-	public boolean depositMoney(){
-		//TODO: Deposits money into account and return if successful
-		return true;
+	public boolean depositMoney(String amount){
+		AccountController ac = new AccountController(LoginPanel.profile_id);
+		return ac.makeDeposit(Integer.parseInt(amount));
 	}
 
-	public boolean WithdrawMoney(){
-		//TODO: Withdraw money into account and return if successful
-		return true;
+	public boolean WithdrawMoney(String amount){
+		AccountController ac = new AccountController(LoginPanel.profile_id);
+		System.out.println(Integer.parseInt(amount));
+		System.out.println("228");
+		return ac.makeWithdrawal(Integer.parseInt(amount));
 	}
 }

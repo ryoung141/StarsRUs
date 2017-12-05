@@ -3,9 +3,12 @@ import java.util.ArrayList;
 
 public class AccountController extends Controller
 {
-	public AccountController()
+	public profileHandle ph;
+
+	public AccountController(int id)
 	{
 		super();
+		this.ph = new profileHandle(id);
 	}
 
 	public List<stock> getStocksOwned(int account_id)
@@ -24,5 +27,29 @@ public class AccountController extends Controller
 
 		return ret;
 	}
+
+	public boolean makeDeposit(int amount)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		System.out.println(ah.getOwner());
+		marketAccountHandle mh = ah.getMarketAccount();
+
+		return mh.makeDeposit(amount);
+	}
+
+	public boolean makeWithdrawal(int amount)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		marketAccountHandle mh = ah.getMarketAccount();
+
+		return mh.makeWithdrawal(amount);
+	}
+
+	public String getOwner()
+	{
+		return this.ph.username;
+	}
+
+
 
 }

@@ -3,6 +3,7 @@
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
+import static java.lang.Math.toIntExact;
 
 public class transaction extends item
 {
@@ -151,6 +152,65 @@ public class transaction extends item
 			this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public boolean makeTransaction(int a_id, String type, int amount)
+	{
+		try
+		{
+			long date = System.currentTimeMillis();
+			System.out.println(date);
+; 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+			System.out.println(rs);
+
+			query = "SELECT t_id FROM transactions WHERE date="+date;
+			System.out.println(query);
+			System.out.println(date);
+			stmt = this.con.createStatement();
+			ResultSet rs1 = stmt.executeQuery(query);
+			if(rs1.next())
+			{
+				System.out.println(type);
+				boolean success = false;
+				switch(type)
+				{
+					case "deposit":
+						query = "INSERT INTO deposit(t_id, amount) VALUES ("+rs1.getInt("t_id")+", "+amount+")";
+						stmt = this.con.createStatement();
+						rs = stmt.executeUpdate(query);
+						this.closeConnection();
+						if(rs > 0)
+						{
+							success = true;
+						}
+						break;
+
+					case "withdrawal":
+						query = "INSERT INTO withdrawal(t_id, amount) VALUES ("+rs1.getInt("t_id")+", "+amount+")";
+						stmt = this.con.createStatement();
+						rs = stmt.executeUpdate(query);
+						this.closeConnection();
+						if(rs > 0)
+						{
+							success = true;
+						}
+						break;
+
+					case "buy":
+						break;
+
+					case "sell":
+						break;
+
+					case "accrue":
+						break;
+				}
+				return success;	
+			}
+		}catch(Exception e){System.out.println(e);}
+		return false;
 	}
 }
 

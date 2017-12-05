@@ -26,5 +26,10 @@ public class UserController extends Controller
 		return this.ph.id;
 	}
 
+	public String getUsername()
+	{
+		return this.ph.username;
+	}
+
 }
 
