@@ -11,6 +11,14 @@ public class MainWindow {
 	public static final String CREATE_ACC_PANEL = "Create account";
 	public static final String TRADER_INTERFACE = "Trader interface";
 
+	public static JMenuBar menuBar;
+	public static JMenu optionsMenu;
+	public static JMenuItem moviesMenuItem;
+	public static JMenuItem logoutMenuItem;
+
+	public static JDialog moviesDialog;
+
+
 	public MainWindow() {
 
 		//Instantiate Frame
@@ -33,7 +41,47 @@ public class MainWindow {
 		frame.setTitle("StarsRus");
 		frame.setSize(800, 600);
 		frame.setVisible(true);
+
+		//Movie Dialog
+		moviesDialog = new JDialog();
+		moviesDialog.setSize(400, 600);
+		moviesDialog.setVisible(false);
+
+		//MenuBar setup
+		menuBar = new JMenuBar();
+		optionsMenu = new JMenu("Options");
+
+		moviesMenuItem = new JMenuItem("Movies");
+		moviesMenuItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				MoviePanel mp = new MoviePanel();
+				moviesDialog.add(mp);
+				moviesDialog.setVisible(true);
+			}
+		});
+
+		logoutMenuItem = new JMenuItem("Log Out");
+		logoutMenuItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("Log out");
+			}
+		});
+
+		optionsMenu.add(moviesMenuItem);
+		optionsMenu.add(logoutMenuItem);
+		menuBar.add(optionsMenu);
+
+		frame.setJMenuBar(menuBar);
+		showMenu();
 	}	
+
+	public static void hideMenu(){
+		menuBar.setVisible(false);
+	}
+
+	public static void showMenu(){
+		menuBar.setVisible(true);
+	}
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {

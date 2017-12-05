@@ -6,14 +6,12 @@ import java.util.regex.*;
 import java.util.ArrayList;
 
 public class MovieContractDetailPanel extends JPanel{
-	private Stock stock;
+	private MovieContract MovieContract;
 	private JLabel titleLabel;
 	private JLabel movieTitleLabel;
 	private JLabel roleLabel;
 	private JLabel yearLabel;
 	private JLabel totalValueLabel;
-
-	public static String[] contracts = {"Batman", "Ben10", "Transformers", "Harry Potter", "Ronnie and the Dweebs"};
 
 	public MovieContractDetailPanel(){
 		this.setLayout(null);
@@ -41,7 +39,7 @@ public class MovieContractDetailPanel extends JPanel{
 		yearLabel.setHorizontalAlignment(JLabel.CENTER);
 		yearLabel.setFont(yearLabel.getFont().deriveFont(12.0f));
 
-		totalValueLabel = new JLabel("Total Contract Value: $23002.20");
+		totalValueLabel = new JLabel("Value: $23002.20");
 		totalValueLabel.setBounds(100, base + 100, 200, 25);
 		totalValueLabel.setHorizontalAlignment(JLabel.CENTER);
 		totalValueLabel.setFont(totalValueLabel.getFont().deriveFont(12.0f));
@@ -56,8 +54,28 @@ public class MovieContractDetailPanel extends JPanel{
 		this.add(totalValueLabel);
 	}
 
-	public void changeDetails(Stock s){
-		this.stock = s;
+	public void changeDetail(MovieContract m){
+		this.MovieContract = m;
+		setMovieTitle(m.getMovieTitle());
+		setRole(m.getRole());
+		setYear(m.getYear());
+		setTotalValue(m.getTotalValue());
+	}
+
+	public void setMovieTitle(String movieTitle){
+		movieTitleLabel.setText("Movie: " + movieTitle);
+	}
+
+	public void setRole(String role){
+		roleLabel.setText("Role: " + role);
+	}
+
+	public void setYear(int year){
+		yearLabel.setText("Year: " + Integer.toString(year));
+	}
+
+	public void setTotalValue(double totalValue){
+		totalValueLabel.setText("Value: $" + Double.toString(totalValue));
 	}
 
 }
