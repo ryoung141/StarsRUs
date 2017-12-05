@@ -40,6 +40,28 @@ public class stockAccountHandle extends accountHandle
 		}catch(Exception e){System.out.println(e);}
 	}
 
+	public boolean create(int master_id, int s_id)
+	{
+		try
+		{
+			this.openConnection();
+			String query = "INSERT INTO stock_account(master_id, s_id) VALUES ("+master_id+", "+s_id+")";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			if(rs > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
+	}
+
 	public void getStockAccounts(int master_id)
 	{
 		try
@@ -67,5 +89,60 @@ public class stockAccountHandle extends accountHandle
 
 		}catch(Exception e){System.out.println(e);}
 		return null;
+	}
+
+	public stockAccountHandle getHandle(int s_id)
+	{
+		if(this.accountList != null)
+		{
+			for(stockAccountHandle sh:this.accountList)
+			{
+				if(sh.s_id == s_id)
+				{
+					return sh;
+				}
+			}
+		}
+		return null;
+	}
+
+	public boolean makePurchase(double amount)
+	{
+		try
+		{
+			this.openConnection();
+			double new_balance = this.balance + amount;
+			String query = "UPDATE stock_account SET balance="+new_balance+" WHERE a_id="+this.id;
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			transaction t = new transaction();
+			boolean ret = t.makeTransaction(this.master_id, "buy", amount, this.s_id);
+
+			return ret;
+
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
+	}
+
+	public boolean makeSale(double amount)
+	{
+		try
+		{
+			this.openConnection();
+			double new_balance = this.balance - amount;
+			String query = "UPDATE stock_account SET balance="+new_balance+" WHERE a_id="+this.id;
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			transaction t = new transaction();
+			boolean ret = t.makeTransaction(this.master_id, "sell", amount, this.s_id);
+
+			return ret;
+
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
 	}
 }

@@ -71,5 +71,10 @@ public class stock extends item
 
 		}catch(Exception e){System.out.println(e);}
 	}
+
+	public int getCurrentPrice()
+	{
+		return this.current_price;
+	}
 }
 

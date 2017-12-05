@@ -59,6 +59,14 @@ public class accountHandle extends item
 		return new marketAccountHandle(this.id);
 	}
 
+	public stockAccountHandle getStockAccounts()
+	{
+		stockAccountHandle sh = new stockAccountHandle();
+		sh.getStockAccounts(this.id);
+
+		return sh;
+	}
+
 	public boolean create(String owner)
 	{
 		try

@@ -159,7 +159,7 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
-; 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
+ 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
 
@@ -193,14 +193,51 @@ public class transaction extends item
 							success = true;
 						}
 						break;
+				}
+				return success;	
+			}
+		}catch(Exception e){System.out.println(e);}
+		return false;
+	}
 
+	public boolean makeTransaction(int a_id, String type, double amount, int s_id)
+	{
+		try
+		{
+			long date = System.currentTimeMillis();
+ 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			query = "SELECT t_id FROM transactions WHERE date="+date;
+			stmt = this.con.createStatement();
+			ResultSet rs1 = stmt.executeQuery(query);
+			if(rs1.next())
+			{
+				System.out.println(type);
+				boolean success = false;
+				switch(type)
+				{
 					case "buy":
+						query = "INSERT INTO buy(t_id, s_id, amount) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
+						stmt = this.con.createStatement();
+						rs = stmt.executeUpdate(query);
+						this.closeConnection();
+						if(rs > 0)
+						{
+							success = true;
+						}
 						break;
 
 					case "sell":
-						break;
-
-					case "accrue":
+						query = "INSERT INTO sell(t_id, s_id, amount) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
+						stmt = this.con.createStatement();
+						rs = stmt.executeUpdate(query);
+						this.closeConnection();
+						if(rs>0)
+						{
+							success = true;
+						}
 						break;
 				}
 				return success;	
