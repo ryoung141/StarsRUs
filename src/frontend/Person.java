@@ -1,17 +1,19 @@
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
 public class Person {
 	private String stockSymbol;
 	private String name;
 	private String dateOfBirth;
-	private String[] movieContracts;
+	private ArrayList<MovieContract> movieContracts;
 
 	public Person(String stockSymbol, String name, String dob){
 		this.stockSymbol = stockSymbol;
 		this.name = name;
 		this.dateOfBirth = dob;
-		getMovieContracts();
+		this.movieContracts = getMovieContracts();
 	}
-
-
 
 	public void setStockSymbol(String stockSymbol){
 		this.stockSymbol = stockSymbol;
@@ -37,8 +39,12 @@ public class Person {
 		return this.dateOfBirth;
 	}
 
-	public void getMovieContracts(){
-		//TODO: Implement contracts
-		return;
+	public void setMovieContracts(ArrayList<MovieContract> movieContracts){
+		this.movieContracts = movieContracts;
+	}
+
+	public ArrayList<MovieContract> getMovieContracts(){
+		//TODO: Implement 
+		return new ArrayList<MovieContract>();
 	}
 }

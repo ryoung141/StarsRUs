@@ -108,10 +108,12 @@ public class StockDetailPanel extends JPanel{
 		profileButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(profilePanel == null){
-					profilePanel = new ProfilePanel(stock);
+					Person person = getPerson(stock);
+					profilePanel = new ProfilePanel(person);
 					profileDialog.add(profilePanel);
 				} else {
-					profilePanel.changeDetails(stock);
+					Person person = getPerson(stock);
+					profilePanel.changeDetails(person);
 				}
 				profileDialog.setVisible(true);
 			}
@@ -138,6 +140,12 @@ public class StockDetailPanel extends JPanel{
 	public int getOwned(Stock s){
 		//TODO: Get amount of stocks owned as int
 		return 797;
+	}
+
+	public Person getPerson(Stock s){
+		//TODO: Return a Person object given the stock
+
+		return SampleData.personMap.get(s.getSymbol());
 	}
 
 	public void setSymbolLabel(String symbol){
