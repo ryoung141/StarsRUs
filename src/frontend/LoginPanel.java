@@ -13,6 +13,8 @@ public class LoginPanel extends JPanel {
 	private JButton loginButton;
 	private JButton createAccButton;
 
+	public static int profile_id;
+
 	public LoginPanel() {
 		this.setLayout(null);
 		this.setBackground(Color.GRAY);
@@ -76,7 +78,11 @@ public class LoginPanel extends JPanel {
 	}
 
 	public boolean authenticateUser(String username, String password) {
-		//TODO: Implement
-		return true;
+		UserController u = new UserController();
+		boolean ret = u.authenticateUser(username, password);
+
+		this.profile_id = u.getID();
+
+		return ret;
 	}
 }

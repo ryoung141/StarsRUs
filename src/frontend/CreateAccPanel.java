@@ -235,7 +235,7 @@ public class CreateAccPanel extends JPanel {
 
 				//Add to Datebase
 				if(accReadyForCreation) {
-					if(createUser(firstName, lastName, phoneNum, email, taxID, username, password)) {
+					if(createUser(firstName, lastName, phoneNum, email, taxID, username, password, stateCode)) {
 						JDialog d = new JDialog();
 						d.setSize(200, 100);
 						JLabel msg = new JLabel("Account Created!");
@@ -384,10 +384,11 @@ public class CreateAccPanel extends JPanel {
 		}
 	}
 
-	public boolean createUser(String firstName, String lastName, String phoneNum, String email, String taxID, String username, String password){
-		//TODO: Implement with mySQL connection
+	public boolean createUser(String firstName, String lastName, String phoneNum, String email, String taxID, String username, String password, String state){
+		UserController u = new UserController();
+		boolean ret = u.createUser(firstName, lastName, phoneNum, email, Integer.parseInt(taxID), username, password, state);
 
-		return true;
+		return ret;
 	}
 
 }
