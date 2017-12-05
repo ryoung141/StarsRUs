@@ -15,11 +15,11 @@ public class Controller
 {
 	public Controller()
 	{
-		System.out.println("woo");
+
 	}
 
 	public static void main(String[] args)
 	{
-		System.out.println("woo");
+		
 	}
 }

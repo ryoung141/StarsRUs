@@ -82,8 +82,6 @@ public class LoginPanel extends JPanel {
 		UserController u = new UserController();
 		boolean ret = u.authenticateUser(username, password);
 
-		System.out.println(ret);
-
 		this.profile_id = u.getID();
 		this.username = u.getUsername();
 

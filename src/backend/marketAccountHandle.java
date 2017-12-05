@@ -85,11 +85,9 @@ public class marketAccountHandle extends accountHandle
 		{
 			this.openConnection();
 			int new_balance = this.balance - amount;
-			System.out.println(new_balance);
 			String query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
-			System.out.println("broken here?");
 
 			transaction t = new transaction();
 			boolean ret = t.makeTransaction(this.id, "withdrawal", amount);
@@ -99,5 +97,10 @@ public class marketAccountHandle extends accountHandle
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
+	}
+
+	public int getBalance()
+	{
+		return this.balance;
 	}
 }

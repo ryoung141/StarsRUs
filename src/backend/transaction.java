@@ -159,15 +159,11 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
-			System.out.println(date);
 ; 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
-			System.out.println(rs);
 
 			query = "SELECT t_id FROM transactions WHERE date="+date;
-			System.out.println(query);
-			System.out.println(date);
 			stmt = this.con.createStatement();
 			ResultSet rs1 = stmt.executeQuery(query);
 			if(rs1.next())
