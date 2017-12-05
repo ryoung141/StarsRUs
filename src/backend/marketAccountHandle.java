@@ -104,8 +104,9 @@ public class marketAccountHandle extends accountHandle
 		return this.balance;
 	}
 
-	public boolean validateBalance()
+	public boolean validateBalance(int subtract)
 	{
-		return this.balance > 0;
+		return (this.balance - subtract) > 0;
 	}
+
 }
