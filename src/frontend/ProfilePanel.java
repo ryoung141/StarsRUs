@@ -61,8 +61,32 @@ public class ProfilePanel extends JPanel{
 		
 		movieContractDetailPanel = new MovieContractDetailPanel();
 		movieContractDetailPanel.setBounds(0, 300, 400, 200);
+		movieContractDetailPanel.setVisible(false);
 
 		//Event listeners
+		contractsList.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e) {
+				String selectedItem = (String) contractsList.getSelectedValue();
+				if(selectedItem != null){
+					MovieContract m = contractsMap.get(selectedItem);
+					movieContractDetailPanel.changeDetail(m);
+					movieContractDetailPanel.setVisible(true);
+				}
+			}
+		});
+
+		contractsList.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String selectedItem = (String) contractsList.getSelectedValue();
+					if(selectedItem != null){
+					MovieContract m = contractsMap.get(selectedItem);
+					movieContractDetailPanel.changeDetail(m);
+					movieContractDetailPanel.setVisible(true);
+					}
+				}
+			}
+		});
 
 		//Initialize data
 		changeDetails(person);
@@ -114,8 +138,8 @@ public class ProfilePanel extends JPanel{
 		HashMap<String, MovieContract> cm = new HashMap<String, MovieContract>();
 
 		for (MovieContract mc: movieContracts) {
-			c.add(mc.movieTitle);
-			cm.put(mc.movieTitle, mc);
+			c.add(mc.getMovieTitle());
+			cm.put(mc.getMovieTitle(), mc);
 		}
 
 		contracts = c;
