@@ -10,14 +10,7 @@ public class UserController extends Controller
 	public boolean authenticateUser(String username, String password)
 	{
 		this.ph = new profileHandle(username, password);
-		if(this.ph.auth = false)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return this.ph.auth;
 	}
 
 	public boolean createUser(String firstname, String lastname, String phonenumber, String email, int taxID, String username, String password, String state)

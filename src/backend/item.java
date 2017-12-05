@@ -38,4 +38,15 @@ public class item
 
 		}catch(Exception e){System.out.println(e);}
 	}
+
+	public boolean isResultSetEmpty(ResultSet rs)
+	{
+		try
+		{
+			return !rs.first();
+
+		}catch(Exception e){System.out.println(e);}
+
+		return true;
+	}
 }

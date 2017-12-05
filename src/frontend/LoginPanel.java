@@ -51,7 +51,7 @@ public class LoginPanel extends JPanel {
 				String username = usernameField.getText();
 				String password = passwordField.getText();
 
-				if(authenticateUser(username, password)){
+				if(authenticateUser(username, password) == true){
 					System.out.println("Access Granted");
 					CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
 					c.show(MainWindow.mainPanel, MainWindow.TRADER_INTERFACE);
@@ -80,6 +80,8 @@ public class LoginPanel extends JPanel {
 	public boolean authenticateUser(String username, String password) {
 		UserController u = new UserController();
 		boolean ret = u.authenticateUser(username, password);
+
+		System.out.println(ret);
 
 		this.profile_id = u.getID();
 

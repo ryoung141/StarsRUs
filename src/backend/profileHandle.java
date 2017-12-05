@@ -12,7 +12,7 @@ public class profileHandle extends item
 	String state_code;
 	String phonenumber;
 	String email;
-	public boolean auth;
+	public boolean auth = false;
 
 	public profileHandle()
 	{
@@ -63,7 +63,7 @@ public class profileHandle extends item
 			}
 			ResultSet rs = stmt.executeQuery(query);
 			
-			if(rs.next())
+			if(!this.isResultSetEmpty(rs))
 			{
 				this.accountData = rs;
 				this.id = rs.getInt("tax_id");
@@ -73,10 +73,7 @@ public class profileHandle extends item
 				this.state_code = rs.getString("state");
 				this.phonenumber = rs.getString("phonenumber");
 				this.email = rs.getString("email");
-			}
-			else
-			{
-				this.auth = false;
+				this.auth = true;
 			}
 			this.closeConnection();
 
