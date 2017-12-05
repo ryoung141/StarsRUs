@@ -12,8 +12,11 @@ public class MainWindow {
 	public static final String TRADER_INTERFACE = "Trader interface";
 
 	public static JMenuBar menuBar;
-	public static JMenu moviesMenu;
-	public static JMenu logOutMenu;
+	public static JMenu optionsMenu;
+	public static JMenuItem moviesMenuItem;
+	public static JMenuItem logoutMenuItem;
+
+	public static JDialog moviesDialog;
 
 
 	public MainWindow() {
@@ -39,13 +42,34 @@ public class MainWindow {
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 
+		//Movie Dialog
+		moviesDialog = new JDialog();
+		moviesDialog.setSize(400, 600);
+		moviesDialog.setVisible(false);
+
 		//MenuBar setup
 		menuBar = new JMenuBar();
-		moviesMenu = new JMenu("Options");
+		optionsMenu = new JMenu("Options");
 
-		logOutMenu = new JMenu("Log Out");
-		menuBar.add(moviesMenu);
-		menuBar.add(logOutMenu);
+		moviesMenuItem = new JMenuItem("Movies");
+		moviesMenuItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				MoviePanel mp = new MoviePanel();
+				moviesDialog.add(mp);
+				moviesDialog.setVisible(true);
+			}
+		});
+
+		logoutMenuItem = new JMenuItem("Log Out");
+		logoutMenuItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("Log out");
+			}
+		});
+
+		optionsMenu.add(moviesMenuItem);
+		optionsMenu.add(logoutMenuItem);
+		menuBar.add(optionsMenu);
 
 		frame.setJMenuBar(menuBar);
 		showMenu();
