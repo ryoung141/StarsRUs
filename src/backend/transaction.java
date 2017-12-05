@@ -1,10 +1,10 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
-class transaction extends item
+public class transaction extends item
 {
 	int a_id;
 	int date;

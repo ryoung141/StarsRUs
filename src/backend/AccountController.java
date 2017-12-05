@@ -1,10 +1,7 @@
-package StarsRUSControllers;
-
-import StarsRUSModels.*;
 import java.util.List;
 import java.util.ArrayList;
 
-class AccountController extends Controller
+public class AccountController extends Controller
 {
 	public AccountController()
 	{
@@ -16,7 +13,7 @@ class AccountController extends Controller
 		stockAccountHandle sh = new stockAccountHandle();
 		sh.getStockAccounts(account_id);
 
-		stockAcctList = sh.accountList;
+		List<stockAccountHandle> stockAcctList = sh.accountList;
 
 		List<stock> ret = new ArrayList<stock>();
 

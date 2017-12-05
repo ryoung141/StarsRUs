@@ -1,8 +1,4 @@
-package StarsRUSControllers;
-
-import StarsRUSModels.*;
-
-class UserController extends Controller
+public class UserController extends Controller
 {
 	profileHandle ph;
 
@@ -14,7 +10,7 @@ class UserController extends Controller
 	public boolean authenticateUser(String username, String password)
 	{
 		this.ph = new profileHandle(username, password);
-		if(this.ph.auth.equals(false))
+		if(this.ph.auth = false)
 		{
 			return false;
 		}

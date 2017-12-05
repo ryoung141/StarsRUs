@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class marketAccountHandle extends accountHandle
+public class marketAccountHandle extends accountHandle
 {
 	int balance;
 

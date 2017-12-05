@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class profileHandle extends item
+public class profileHandle extends item
 {
 	ResultSet accountData;
 	accountHandle[] accounts;
@@ -12,7 +12,7 @@ class profileHandle extends item
 	String state_code;
 	String phonenumber;
 	String email;
-	boolean auth;
+	public boolean auth;
 
 	public profileHandle()
 	{

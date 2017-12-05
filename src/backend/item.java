@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class item
+public class item
 {
 	static final String CONNECTION = "jdbc:mysql://localhost:3306/cs174a?useSSL=false";
 	static final String USER = "root";

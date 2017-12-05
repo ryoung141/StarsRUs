@@ -1,8 +1,6 @@
-package StarsRUSModels;
-
 import java.sql.*;
 
-class accountHandle extends item
+public class accountHandle extends item
 {
 	String owner;
 

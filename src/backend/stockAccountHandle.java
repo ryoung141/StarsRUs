@@ -1,15 +1,15 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
-class stockAccountHandle extends accountHandle
+public class stockAccountHandle extends accountHandle
 {
 	int balance;
 	int master_id;
-	int s_id;
-	List<stockAccountHandle> accountList;
+	public int s_id;
+	public List<stockAccountHandle> accountList;
 
 	public stockAccountHandle()
 	{
@@ -58,14 +58,14 @@ class stockAccountHandle extends accountHandle
 		}catch(Exception e){System.out.println(e);}
 	}
 
-	public String getStock(int s_id)
+	public stock getStock(int s_id)
 	{
 		try
 		{
 			stock s = new stock(s_id);
-			return s.stock_symbol;
+			return s;
 
 		}catch(Exception e){System.out.println(e);}
-		return "false";
+		return null;
 	}
 }
