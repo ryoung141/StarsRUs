@@ -7,11 +7,16 @@ public class marketAccountHandle extends accountHandle
 {
 	int balance;
 
+	public marketAccountHandle()
+	{
+		super();
+	}
+
 	public marketAccountHandle(int id)
 	{
+		super();
 		try
 		{
-			this.openConnection();
 			String query = "SELECT balance FROM market_account WHERE a_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -24,6 +29,28 @@ public class marketAccountHandle extends accountHandle
 			this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public boolean create(int a_id)
+	{
+		try
+		{
+			this.openConnection();
+			String query = "INSERT INTO market_account(a_id, balance) VALUES ("+a_id+", 1000)";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			if(rs > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
 	}
 
 	public boolean makeDeposit(int amount)

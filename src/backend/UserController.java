@@ -17,6 +17,10 @@ public class UserController extends Controller
 	{
 		this.ph = new profileHandle();
 		boolean ret = ph.create(firstname, lastname, phonenumber, email, taxID, username, password, state);
+		if(ret)
+		{
+			
+		}
 
 		return ret;
 	}

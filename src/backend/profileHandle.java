@@ -90,15 +90,24 @@ public class profileHandle extends item
 			query = query + taxID + ", '" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + state + "', '" + phonenumber + "', '" + email + "')";
 			int results = stmt.executeUpdate(query);
 
-			this.closeConnection();
+			boolean success = false;
+
 			if(results > 0)
 			{
-				return true;
+				accountHandle ah = new accountHandle();
+				success = ah.create(username);
+				ah = new accountHandle(username);
+				if(success)
+				{
+					marketAccountHandle mh = new marketAccountHandle();
+					success = mh.create(ah.id);
+				}
 			}
-			else
-			{
-				return false;
-			}
+
+			this.closeConnection();
+
+			return success;
+
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
