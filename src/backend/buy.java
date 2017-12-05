@@ -1,23 +1,23 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class sell extends transaction
+public class buy extends transaction
 {
 	int s_id;
 	float amount;
 
-	public sell()
+	public buy()
 	{
 		super();
 	}
 
-	public sell(int id)
+	public buy(int id)
 	{
 		super();
 		try
 		{
-			String query = "SELECT s_id, amount FROM sell WHERE t_id="+id;
+			String query = "SELECT s_id, amount FROM buy WHERE t_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 

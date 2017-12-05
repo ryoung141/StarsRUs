@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class profileHandle extends item
+public class profileHandle extends item
 {
 	ResultSet accountData;
 	accountHandle[] accounts;
@@ -12,6 +12,12 @@ class profileHandle extends item
 	String state_code;
 	String phonenumber;
 	String email;
+	public boolean auth;
+
+	public profileHandle()
+	{
+		super();
+	}
 
 
 	public profileHandle(String username, String password)
@@ -68,9 +74,37 @@ class profileHandle extends item
 				this.phonenumber = rs.getString("phonenumber");
 				this.email = rs.getString("email");
 			}
+			else
+			{
+				this.auth = false;
+			}
 			this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public boolean create(String firstname, String lastname, String phonenumber, String email, int taxID, String username, String password, String state)
+	{
+		try
+		{
+			this.openConnection();
+			Statement stmt = this.con.createStatement();
+			String query = "INSERT INTO customer_profile(tax_id, username, password, firstname, lastname, state, phonenumber, email) VALUES (";
+			query = query + taxID + "," + username + "," + password + "," + firstname + "," + lastname + "," + state + "," + phonenumber + "," + email + ")";
+			ResultSet rs = stmt.executeQuery(query);
+
+			this.closeConnection();
+			if(rs.next())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}catch(Exception e){System.out.println(e);}
+
+		return false;
 	}
 
 	//uncomment for testing

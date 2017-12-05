@@ -1,8 +1,8 @@
-package StarsRUSModels;
 
 import java.sql.*;
 
-class stock extends item
+
+public class stock extends item
 {
 	int a_id;
 	int closing_price;
@@ -72,3 +72,4 @@ class stock extends item
 		}catch(Exception e){System.out.println(e);}
 	}
 }
+

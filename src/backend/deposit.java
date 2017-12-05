@@ -1,22 +1,22 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class withdrawal extends transaction
+public class deposit extends transaction
 {
 	int amount;
 
-	public withdrawal()
+	public deposit()
 	{
 		super();
 	}
 
-	public withdrawal(int id)
+	public deposit(int id)
 	{
 		super();
 		try
 		{
-			String query = "SELECT amount FROM withdrawal WHERE t_id="+id;
+			String query = "SELECT amount FROM deposit WHERE t_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 

@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class actor extends item
+public class actor extends item
 {
 	int s_id;
 	int date_of_birth;

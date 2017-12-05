@@ -1,8 +1,8 @@
-package StarsRUSModels;
+
 
 import java.sql.*;
 
-class contract extends item
+public class contract extends item
 {
 	int a_id;
 	int year_released;
