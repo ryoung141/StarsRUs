@@ -14,6 +14,7 @@ public class LoginPanel extends JPanel {
 	private JButton createAccButton;
 
 	public static int profile_id;
+	public static String username;
 
 	public LoginPanel() {
 		this.setLayout(null);
@@ -51,7 +52,7 @@ public class LoginPanel extends JPanel {
 				String username = usernameField.getText();
 				String password = passwordField.getText();
 
-				if(authenticateUser(username, password)){
+				if(authenticateUser(username, password) == true){
 					System.out.println("Access Granted");
 					CardLayout c = (CardLayout) (MainWindow.mainPanel.getLayout());
 					c.show(MainWindow.mainPanel, MainWindow.TRADER_INTERFACE);
@@ -82,6 +83,7 @@ public class LoginPanel extends JPanel {
 		boolean ret = u.authenticateUser(username, password);
 
 		this.profile_id = u.getID();
+		this.username = u.getUsername();
 
 		return ret;
 	}

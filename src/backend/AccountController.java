@@ -3,9 +3,12 @@ import java.util.ArrayList;
 
 public class AccountController extends Controller
 {
-	public AccountController()
+	public profileHandle ph;
+
+	public AccountController(int id)
 	{
 		super();
+		this.ph = new profileHandle(id);
 	}
 
 	public List<stock> getStocksOwned(int account_id)
@@ -24,5 +27,107 @@ public class AccountController extends Controller
 
 		return ret;
 	}
+
+	public int getBalance()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		marketAccountHandle mh = ah.getMarketAccount();
+		System.out.println(mh.getBalance());
+
+		return mh.getBalance();
+	}
+
+	public boolean makeDeposit(int amount)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		marketAccountHandle mh = ah.getMarketAccount();
+
+		return mh.makeDeposit(amount);
+	}
+
+	public boolean makeWithdrawal(int amount)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		marketAccountHandle mh = ah.getMarketAccount();
+
+		if(mh.validateBalance(amount))
+		{
+			return mh.makeWithdrawal(amount);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public boolean buyStock(int s_id, double count)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		stock s = new stock(s_id);
+		double amount = count * s.getCurrentPrice();
+		int withdraw = (int) amount;
+
+		boolean success = false;
+
+		marketAccountHandle mh = ah.getMarketAccount();
+		if(mh.validateBalance(withdraw))
+		{
+			stockAccountHandle sh = ah.getStockAccounts();
+			stockAccountHandle sh1 = sh.getHandle(s_id);
+			if(!sh1.equals(null))
+			{
+				sh1.makePurchase(count);
+			}
+			else
+			{
+				sh1 = new stockAccountHandle();
+				success = sh1.create(ah.id, s_id);
+				if(success)
+				{
+					sh = ah.getStockAccounts();
+					sh1 = sh.getHandle(s_id);
+					success = sh1.makePurchase(amount);
+				}
+			}
+
+			if(success)
+			{
+				success = makeWithdrawal(withdraw);
+			}
+		}
+
+		return success;
+	}
+
+	public boolean sellStock(int s_id, double count)
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		stock s = new stock(s_id);
+		double amount = count * s.getCurrentPrice();
+		int deposit = (int) amount;
+
+		boolean success = false;
+
+		stockAccountHandle sh = ah.getStockAccounts();
+		stockAccountHandle sh1 = sh.getHandle(s_id);
+		if(!sh1.equals(null))
+		{
+			success = sh1.makeSale(count);
+		}
+
+		if(success)
+		{
+			success = makeDeposit(deposit);
+		}
+
+		return success;
+	}
+
+	public String getOwner()
+	{
+		return this.ph.username;
+	}
+
+
 
 }

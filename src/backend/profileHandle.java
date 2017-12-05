@@ -12,7 +12,7 @@ public class profileHandle extends item
 	String state_code;
 	String phonenumber;
 	String email;
-	public boolean auth;
+	public boolean auth = false;
 
 	public profileHandle()
 	{
@@ -63,7 +63,7 @@ public class profileHandle extends item
 			}
 			ResultSet rs = stmt.executeQuery(query);
 			
-			if(rs.next())
+			if(!this.isResultSetEmpty(rs))
 			{
 				this.accountData = rs;
 				this.id = rs.getInt("tax_id");
@@ -73,10 +73,7 @@ public class profileHandle extends item
 				this.state_code = rs.getString("state");
 				this.phonenumber = rs.getString("phonenumber");
 				this.email = rs.getString("email");
-			}
-			else
-			{
-				this.auth = false;
+				this.auth = true;
 			}
 			this.closeConnection();
 
@@ -93,15 +90,24 @@ public class profileHandle extends item
 			query = query + taxID + ", '" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + state + "', '" + phonenumber + "', '" + email + "')";
 			int results = stmt.executeUpdate(query);
 
-			this.closeConnection();
+			boolean success = false;
+
 			if(results > 0)
 			{
-				return true;
+				accountHandle ah = new accountHandle();
+				success = ah.create(username);
+				ah = new accountHandle(username);
+				if(success)
+				{
+					marketAccountHandle mh = new marketAccountHandle();
+					success = mh.create(ah.id);
+				}
 			}
-			else
-			{
-				return false;
-			}
+
+			this.closeConnection();
+
+			return success;
+
 		}catch(Exception e){System.out.println(e);}
 
 		return false;

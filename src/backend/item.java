@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class item
 {
-	static final String CONNECTION = "jdbc:mysql://cs174a.engr.ucsb.edu:3306/richard_youngDB?useSSL=false";
-	static final String USER = "richard_young";
-	static final String PASS = "113";
+	static final String CONNECTION = "jdbc:mysql://localhost:3306/cs174a?useSSL=false";
+	static final String USER = "root";
+	static final String PASS = " ";
 	Connection con;
 	public int id;
 
@@ -37,5 +37,16 @@ public class item
 			this.con.close();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public boolean isResultSetEmpty(ResultSet rs)
+	{
+		try
+		{
+			return !rs.first();
+
+		}catch(Exception e){System.out.println(e);}
+
+		return true;
 	}
 }

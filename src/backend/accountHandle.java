@@ -53,4 +53,44 @@ public class accountHandle extends item
 		this.id = id;
 		this.owner = owner;
 	}
+
+	public marketAccountHandle getMarketAccount()
+	{
+		return new marketAccountHandle(this.id);
+	}
+
+	public stockAccountHandle getStockAccounts()
+	{
+		stockAccountHandle sh = new stockAccountHandle();
+		sh.getStockAccounts(this.id);
+
+		return sh;
+	}
+
+	public boolean create(String owner)
+	{
+		try
+		{
+			this.openConnection();
+			Statement stmt = this.con.createStatement();
+			String query = "INSERT INTO account(owner) VALUES ('"+owner+"')";
+			int rs = stmt.executeUpdate(query);
+
+			if(rs > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}catch(Exception e){System.out.println(e);}
+		
+		return false;
+	}
+
+	public String getOwner()
+	{
+		return this.owner;
+	}
 }

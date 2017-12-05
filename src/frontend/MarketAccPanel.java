@@ -37,7 +37,7 @@ public class MarketAccPanel extends AccountPanel{
 		titleLabel.setFont(titleLabel.getFont().deriveFont(24.0f));
 
 		balanceLabel = new JLabel("Unitialized");
-		setBalance(getBalance().get("dollars"), getBalance().get("cents"));
+		setBalance(getBalance());
 		balanceLabel.setBounds(100, base + 200, 200, 25);
 		balanceLabel.setHorizontalAlignment(JLabel.CENTER);
 		balanceLabel.setFont(balanceLabel.getFont().deriveFont(16.0f));
@@ -93,9 +93,9 @@ public class MarketAccPanel extends AccountPanel{
 						}
 
 						if(amountReady){
-							if(depositMoney()){
+							if(depositMoney(amount)){
 								depositDiagErr.setText("$" + amount + " has been deposited!");
-								setBalance(getBalance().get("dollars"), getBalance().get("cents"));
+								setBalance(getBalance());
 							} else {
 								depositDiagErr.setText("Error: Unable to deposit");
 							}
@@ -149,9 +149,9 @@ public class MarketAccPanel extends AccountPanel{
 						}
 
 						if(amountReady){
-							if(WithdrawMoney()){
+							if(WithdrawMoney(amount)){
 								withdrawDiagErr.setText("$" + amount + " has been withdrawn!");
-								setBalance(getBalance().get("dollars"), getBalance().get("cents"));
+								setBalance(getBalance());
 							} else {
 								withdrawDiagErr.setText("Error: Unable to deposit");
 							}
@@ -184,23 +184,15 @@ public class MarketAccPanel extends AccountPanel{
 		accountsComboBox.setSelectedItem(AccManagerPanel.MARKET_ACC_PANEL);
 	}
 
-	public HashMap<String, Integer> getBalance() {
-		//TODO: Returns total amount of balance for this account in hashmap
-		int dollars = 4303;
-		int cents = 12;
-
-		HashMap<String,Integer> hm = new HashMap<String, Integer>();
-		hm.put("dollars", dollars);
-		hm.put("cents", cents);
-		return hm;
+	public int getBalance() {
+		AccountController ac = new AccountController(LoginPanel.profile_id);
+		return ac.getBalance();
 	}
 
-	public void setBalance(int dollars, int cents){
+	public void setBalance(int dollars){
 		String balance = 
 			"Balance: $"
-			+ Integer.toString(dollars)
-			+ "."
-			+ Integer.toString(cents);
+			+ Integer.toString(dollars);
 
 		balanceLabel.setText(balance);
 	}
@@ -217,13 +209,13 @@ public class MarketAccPanel extends AccountPanel{
 		}
 	}
 
-	public boolean depositMoney(){
-		//TODO: Deposits money into account and return if successful
-		return true;
+	public boolean depositMoney(String amount){
+		AccountController ac = new AccountController(LoginPanel.profile_id);
+		return ac.makeDeposit(Integer.parseInt(amount));
 	}
 
-	public boolean WithdrawMoney(){
-		//TODO: Withdraw money into account and return if successful
-		return true;
+	public boolean WithdrawMoney(String amount){
+		AccountController ac = new AccountController(LoginPanel.profile_id);
+		return ac.makeWithdrawal(Integer.parseInt(amount));
 	}
 }

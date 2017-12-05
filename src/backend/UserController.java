@@ -10,20 +10,17 @@ public class UserController extends Controller
 	public boolean authenticateUser(String username, String password)
 	{
 		this.ph = new profileHandle(username, password);
-		if(this.ph.auth = false)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return this.ph.auth;
 	}
 
 	public boolean createUser(String firstname, String lastname, String phonenumber, String email, int taxID, String username, String password, String state)
 	{
 		this.ph = new profileHandle();
 		boolean ret = ph.create(firstname, lastname, phonenumber, email, taxID, username, password, state);
+		if(ret)
+		{
+			
+		}
 
 		return ret;
 	}
@@ -31,6 +28,11 @@ public class UserController extends Controller
 	public int getID()
 	{
 		return this.ph.id;
+	}
+
+	public String getUsername()
+	{
+		return this.ph.username;
 	}
 
 }
