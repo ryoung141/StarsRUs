@@ -17,7 +17,15 @@ public class Deposit {
 	}
 
 	public void deposit(double amount) {
-		print("\n" + Double.toString(amount) + " has been deposited!");
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		if(ac.makeDeposit(amount))
+		{
+			print("\n" + Double.toString(amount) + " has been deposited!");
+		}
+		else
+		{
+			print("Error: Deposit failed on the backend!");
+		}
 		return;
 	}
 

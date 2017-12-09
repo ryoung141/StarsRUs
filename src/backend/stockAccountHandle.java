@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class stockAccountHandle extends accountHandle
 {
-	public int balance;
+	public double balance;
 	public int master_id;
 	public int s_id;
 	public List<stockAccountHandle> accountList;
@@ -30,7 +30,7 @@ public class stockAccountHandle extends accountHandle
 
 			if(rs.next())
 			{
-				this.balance = rs.getInt("balance");
+				this.balance = rs.getFloat("balance");
 				this.id = id;
 				this.master_id = rs.getInt("master_id");
 				this.s_id = rs.getInt("s_id");
@@ -118,7 +118,7 @@ public class stockAccountHandle extends accountHandle
 
 			transaction t = new transaction();
 			boolean ret = t.makeTransaction(this.master_id, "buy", amount, price, this.s_id);
-
+			System.out.println(ret+" stockaccounthandle 121");
 			return ret;
 
 		}catch(Exception e){System.out.println(e);}
@@ -144,5 +144,10 @@ public class stockAccountHandle extends accountHandle
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
+	}
+
+	public boolean validateBalance(double subtract)
+	{
+		return (this.balance - subtract) > 0;
 	}
 }

@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AccountController extends Controller
 {
@@ -20,9 +21,22 @@ public class AccountController extends Controller
 		this.ah = new accountHandle(ph.username);
 	}
 
+	public AccountController(String username, String password)
+	{
+		super();
+		this.ph = new profileHandle(username, password);
+		this.ah = new accountHandle(ph.username);
+	}
+
 	public List<profileHandle> getCustomers()
 	{
 		return this.getHandle().getAll();
+	}
+
+	public HashMap<String, stock> getStocks()
+	{
+		stock s = new stock();
+		return s.getAll();
 	}
 
 	public List<stock> getStocksOwned(int account_id)
@@ -86,46 +100,51 @@ public class AccountController extends Controller
 		if(mh.validateBalance(withdraw))
 		{
 			stockAccountHandle sh = ah.getStockAccounts();
-			stockAccountHandle sh1 = sh.getHandle(s.id);
-			if(!sh1.equals(null))
+			try
 			{
-				sh1.makePurchase(amount, price);
-			}
-			else
+				stockAccountHandle sh1 = sh.getHandle(s.id);
+				success = sh1.makePurchase(amount, price);
+
+			}catch(NullPointerException e)
 			{
-				sh1 = new stockAccountHandle();
+				stockAccountHandle sh1 = new stockAccountHandle();
 				success = sh1.create(ah.id, s.id);
 				if(success)
 				{
 					sh = ah.getStockAccounts();
 					sh1 = sh.getHandle(s.id);
 					success = sh1.makePurchase(amount, price);
+					System.out.println(success+" makepurchase accountcontroller 117");
 				}
 			}
 
 			if(success)
 			{
 				success = makeWithdrawal(withdraw);
+				System.out.println(success+" makewithdrawal accountcontroller 123");
 			}
 		}
 
 		return success;
 	}
 
-	public boolean sellStock(int s_id, double count)
+	public boolean sellStock(String symbol, double count)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
-		stock s = new stock(s_id);
+		stock s = new stock(symbol);
 		double price = s.getCurrentPrice();
 		double deposit = price * count;
 		boolean success = false;
 
 		stockAccountHandle sh = ah.getStockAccounts();
-		stockAccountHandle sh1 = sh.getHandle(s_id);
-		if(!sh1.equals(null))
+		try
 		{
-			success = sh1.makeSale(count, price);
-		}
+			stockAccountHandle sh1 = sh.getHandle(s.id);
+			if(sh1.validateBalance(count))
+			{
+				success = sh1.makeSale(count, price);
+			}
+		}catch(NullPointerException e){System.out.println("Error: you don't own that stock!");}
 
 		if(success)
 		{
@@ -133,6 +152,23 @@ public class AccountController extends Controller
 		}
 
 		return success;
+	}
+
+	public HashMap<String, ArrayList<transaction>> getTransactions()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		transaction t = new transaction();
+
+		HashMap<String, ArrayList<transaction>> mappyboi = new HashMap<String, ArrayList<transaction>>();
+		t.getAllTransaction(ah.id);
+
+		mappyboi.put("buy", t.buyList);
+		mappyboi.put("sell", t.sellList);
+		mappyboi.put("deposit", t.depositList);
+		mappyboi.put("withdraw", t.withdrawalList);
+		mappyboi.put("accrual", t.accrualList);
+
+		return mappyboi;
 	}
 
 	public String getOwner()

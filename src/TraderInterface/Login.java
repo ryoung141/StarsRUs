@@ -23,6 +23,8 @@ public class Login {
 
 		if(authenticateUser(username, password)) {
 			TraderInterface.loggedIn = true;
+			TraderInterface.username = username;
+			TraderInterface.password = password;
 			print("\n****LOGIN SUCCESSFUL****\n");
 		} else {
 			print("\n****ERROR: INCORRECT USERNAME OR PASSWORD****");
@@ -40,10 +42,10 @@ public class Login {
 	}
 
 	public boolean authenticateUser(String username, String password) {
-		/*UserController u = new UserController();
+		UserController u = new UserController();
 		boolean ret = u.authenticateUser(username, password);
 
-		this.profile_id = u.getID();
+		/*this.profile_id = u.getID();
 		this.username = u.getUsername();*/
 
 		return true;
