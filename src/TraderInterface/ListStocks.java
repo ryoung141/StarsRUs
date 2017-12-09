@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class ListStocks {
 	private String stockSymbol;
 	private int amount;
 
-	public ArrayList<Stock> stockList = new ArrayList<Stock>();
+	public Map<String, stock> stockMap;
 
 	public static Stock stock1 = new Stock("JOA", "Jordan Ang", 1234.22, 3230.14);
 	public static Stock stock2 = new Stock("JOH", "John Harm", 3032.22, 10.20);
@@ -23,14 +24,7 @@ public class ListStocks {
 	public static Stock stock7 = new Stock("TOU", "Tom Uynh", 557.32, 43.12);
 
 	public ListStocks(){
-
-		stockList.add(stock1);
-		stockList.add(stock2);
-		stockList.add(stock3);
-		stockList.add(stock4);
-		stockList.add(stock5);
-		stockList.add(stock6);
-		stockList.add(stock7);
+		this.stockMap = getStocks();
 		print("\n-----------------Stocks List-------------------\n");
 		listStocks();
 		return;
@@ -46,16 +40,24 @@ public class ListStocks {
 		
 		//stockList = getStocks();
 
-		for(Stock s: stockList){
-			System.out.format(leftAlignFormat, s.symbol, s.name, Double.toString(s.currentPrice));
+		for(Map.Entry<String, stock> entry: this.stockMap.entrySet())
+		{
+			String name = entry.getKey();
+			stock s = entry.getValue();
+			System.out.format(leftAlignFormat, s.stock_symbol, name, Double.toString(s.getCurrentPrice()));
 		}
+
+		/*for(stock s: stockList){
+			System.out.format(leftAlignFormat, s.symbol, s.name, Double.toString(s.currentPrice));
+		}*/
 
 
 		System.out.format("+--------+-----------------+-----------------+%n");
 	}
 
-	public ArrayList<Stock> getStocks() {
-		return new ArrayList<Stock>();
+	public HashMap<String, stock> getStocks() {
+		AccountController ac = new AccountController();
+		return ac.getStocks();
 	}
 
 	public static void print(String p){

@@ -6,6 +6,7 @@ public class sell extends transaction
 {
 	int s_id;
 	double amount;
+	double price;
 
 	public sell()
 	{
@@ -26,6 +27,7 @@ public class sell extends transaction
 				this.id = id;
 				this.s_id = rs.getInt("s_id");
 				this.amount = rs.getDouble("amount");
+				this.amount = rs.getDouble("price");
 			}
 			this.closeConnection();
 

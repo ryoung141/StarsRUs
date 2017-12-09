@@ -6,7 +6,8 @@ public class ShowBalance {
 	}
 
 	public double getMarketAccountBalance() {
-		return 222.22;
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		return ac.getBalance();
 	}
 	
 	public static void print(String p){

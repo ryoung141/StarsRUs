@@ -6,6 +6,7 @@ public class buy extends transaction
 {
 	int s_id;
 	double amount;
+	double price;
 
 	public buy()
 	{
@@ -26,6 +27,7 @@ public class buy extends transaction
 				this.id = id;
 				this.s_id = rs.getInt("s_id");
 				this.amount = rs.getDouble("amount");
+				this.price = rs.getDouble("price");
 			}
 			this.closeConnection();
 

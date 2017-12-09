@@ -27,6 +27,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyName(userInput)) {
+				this.firstName = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a name containing only letters");
@@ -38,6 +39,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyName(userInput)) {
+				this.lastName = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a name containing only letters");
@@ -49,6 +51,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyStateCode(userInput)) {
+				this.stateCode = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a two character state code");
@@ -60,6 +63,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyPhoneNum(userInput)) {
+				this.phoneNum = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a phone number (format: 000-000-0000)");
@@ -71,6 +75,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyEmail(userInput)) {
+				this.email = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a proper email address");
@@ -82,6 +87,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyTaxId(userInput)) {
+				this.taxID = Integer.parseInt(userInput);
 				validInput = true;
 			} else {
 				print("Error: Please enter a valid tax ID");
@@ -93,6 +99,7 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyUsername(userInput)) {
+				this.username = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a username containg only letters and numbers");
@@ -104,13 +111,15 @@ public class CreateAccount {
 		while(validInput == false) {
 			getFormInput();
 			if(verifyPassword(userInput)) {
+				this.password = userInput;
 				validInput = true;
 			} else {
 				print("Error: Please enter a password containg only letters and numbers");
 			}
 		}
 
-		if(createUser(firstName, lastName, phoneNum, email, taxID, username, password, stateCode)) {
+
+		if(createUser(this.firstName, this.lastName, this.phoneNum, this.email, this.taxID, this.username, this.password, this.stateCode)) {
 			print("\n****ACCOUNT HAS BEEN CREATED****\n");
 		} else {
 			print("\n****ERROR: COULD NOT CREATE ACCOUNT****");
@@ -220,8 +229,8 @@ public class CreateAccount {
 	}
 
 	public boolean createUser(String firstName, String lastName, String phoneNum, String email, int taxID, String username, String password, String state){
-		/*UserController u = new UserController();
-		boolean ret = u.createUser(firstName, lastName, phoneNum, email, Integer.parseInt(taxID), username, password, state);*/
+		UserController u = new UserController();
+		boolean ret = u.createUser(firstName, lastName, phoneNum, email, taxID, username, password, state);
 
 		return true;
 	}

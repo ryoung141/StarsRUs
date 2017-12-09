@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class stockAccountHandle extends accountHandle
 {
-	int balance;
-	int master_id;
+	public double balance;
+	public int master_id;
 	public int s_id;
 	public List<stockAccountHandle> accountList;
 
@@ -30,7 +30,7 @@ public class stockAccountHandle extends accountHandle
 
 			if(rs.next())
 			{
-				this.balance = rs.getInt("balance");
+				this.balance = rs.getFloat("balance");
 				this.id = id;
 				this.master_id = rs.getInt("master_id");
 				this.s_id = rs.getInt("s_id");
@@ -106,7 +106,7 @@ public class stockAccountHandle extends accountHandle
 		return null;
 	}
 
-	public boolean makePurchase(double amount)
+	public boolean makePurchase(double amount, double price)
 	{
 		try
 		{
@@ -117,8 +117,8 @@ public class stockAccountHandle extends accountHandle
 			int rs = stmt.executeUpdate(query);
 
 			transaction t = new transaction();
-			boolean ret = t.makeTransaction(this.master_id, "buy", amount, this.s_id);
-
+			boolean ret = t.makeTransaction(this.master_id, "buy", amount, price, this.s_id);
+			System.out.println(ret+" stockaccounthandle 121");
 			return ret;
 
 		}catch(Exception e){System.out.println(e);}
@@ -126,7 +126,7 @@ public class stockAccountHandle extends accountHandle
 		return false;
 	}
 
-	public boolean makeSale(double amount)
+	public boolean makeSale(double amount, double price)
 	{
 		try
 		{
@@ -137,12 +137,17 @@ public class stockAccountHandle extends accountHandle
 			int rs = stmt.executeUpdate(query);
 
 			transaction t = new transaction();
-			boolean ret = t.makeTransaction(this.master_id, "sell", amount, this.s_id);
+			boolean ret = t.makeTransaction(this.master_id, "sell", amount, price, this.s_id);
 
 			return ret;
 
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
+	}
+
+	public boolean validateBalance(double subtract)
+	{
+		return (this.balance - subtract) > 0;
 	}
 }

@@ -4,7 +4,8 @@ import java.sql.*;
 
 public class profileHandle extends item
 {
-	accountHandle[] accounts;
+	public List<marketAccountHandle> marketAccountList;
+	public List<stockAccountHandle> stockAccountList;
 	public String username;
 	public String firstname;
 	public String lastname;
@@ -22,6 +23,8 @@ public class profileHandle extends item
 	public profileHandle(String username, String password)
 	{
 		super();
+		this.marketAccountList = new ArrayList<marketAccountHandle>();
+		this.stockAccountList = new ArrayList<stockAccountHandle>();
 		try
 		{
 			String[] arr = {username, password};
@@ -35,6 +38,8 @@ public class profileHandle extends item
 	public profileHandle(int id)
 	{
 		super();
+		this.marketAccountList = new ArrayList<marketAccountHandle>();
+		this.stockAccountList = new ArrayList<stockAccountHandle>();		
 		try
 		{
 			String[] arr = {Integer.toString(id)};
@@ -118,7 +123,7 @@ public class profileHandle extends item
 		{
 			this.openConnection();
 			Statement stmt = this.con.createStatement();
-			String query = "SELECT tax_id FROM CUSTOMER_PROFILE";
+			String query = "SELECT tax_id FROM customer_profile";
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next())
 			{
@@ -131,6 +136,31 @@ public class profileHandle extends item
 		}catch(Exception e){System.out.println(e);}
 
 		return phList;
+	}
+
+	public void getSubAccounts()
+	{
+		try
+		{
+			this.openConnection();
+			Statement stmt = this.con.createStatement();
+			String query = "SELECT market_account.a_id FROM market_account INNER JOIN account ON account.a_id = market_account.a_id WHERE account.owner='"+this.username+"'";
+			ResultSet rs = stmt.executeQuery(query);	
+			while(rs.next())
+			{
+				marketAccountHandle mh = new marketAccountHandle(rs.getInt("a_id"));
+				this.marketAccountList.add(mh);
+			}
+
+			stmt = this.con.createStatement();
+			query = "SELECT stock_account.a_id FROM stock_account INNER JOIN account ON account.a_id = stock_account.master_id WHERE account.owner='"+this.username+"'";
+			rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+				stockAccountHandle sh = new stockAccountHandle(rs.getInt("a_id"));
+				this.stockAccountList.add(sh);
+			}
+		}catch(Exception e){System.out.println(e);}
 	}
 
 	//uncomment for testing

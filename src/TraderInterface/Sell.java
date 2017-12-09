@@ -24,7 +24,15 @@ public class Sell {
 	}
 
 	public void sellStock(String sym, int amo) {
-		print("\n" + Integer.toString(amo) + " " + sym + " has been sold!");
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		if(ac.sellStock(sym, (double) amo))
+		{
+			print("\n" + Integer.toString(amo) + " " + sym + " has been sold!");
+		}
+		else
+		{
+			print("Error: Error on the backend, stock sale was not successful.");
+		}
 		return;
 	}
 

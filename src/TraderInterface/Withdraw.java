@@ -17,7 +17,15 @@ public class Withdraw {
 	}
 
 	public void withdraw(double amount) {
-		print("\n" + Double.toString(amount) + " has been withdrawed!");
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		if(ac.makeWithdrawal(amount))
+		{
+			print("\n" + Double.toString(amount) + " has been withdrawn!");
+		}
+		else
+		{
+			print("Error: Deposit failed on the backend!");
+		}
 		return;
 	}
 

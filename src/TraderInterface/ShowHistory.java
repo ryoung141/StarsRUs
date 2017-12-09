@@ -9,7 +9,7 @@ public class ShowHistory {
 	private String userInput;
 	private Scanner scan;
 
-	public ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+	public HashMap<String, ArrayList<transaction>> transactionList = new HashMap<String, ArrayList<transaction>>();
 
 	public ShowHistory(){
 
@@ -51,8 +51,9 @@ public class ShowHistory {
 		System.out.format("+------------------+-------+------------------+--------+%n");
 	}
 
-	public ArrayList<Transaction> getTransaction() {
-		return new ArrayList<Transaction>();
+	public void getTransaction() {
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		this.transactionList = ac.getTransactions();
 	}
 
 	public static void print(String p){
