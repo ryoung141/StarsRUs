@@ -24,7 +24,15 @@ public class Buy {
 	}
 
 	public void buyStock(String sym, int amo) {
-		print("\n" + Integer.toString(amo) + " " + sym + " has been bought!");
+		AccountController ac = new AccountController(TraderInterface.username, TraderInterface.password);
+		if(ac.buyStock(sym, (double) amo))
+		{
+			print("\n" + Integer.toString(amo) + " " + sym + " has been bought!");
+		}
+		else
+		{
+			print("Error: Either you don't have enough money, or there was an error on the backend.");
+		}
 		return;
 	}
 

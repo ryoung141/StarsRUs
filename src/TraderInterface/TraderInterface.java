@@ -27,6 +27,9 @@ public class TraderInterface{
 
 	public static ArrayList<MovieContract> jordanMovieContract = new ArrayList<MovieContract>();
 
+	public static String username;
+	public static String password;
+
 	public static void main(String[] arg){
 
 		//Sample Data
@@ -84,9 +87,9 @@ public class TraderInterface{
 		getUserInput(minInput, maxInput);
 
 		switch(chosenOption) {
-			case 1: Login l = new Login();
+			case 1: Login l = new Login(); //done
 				break;
-			case 2: CreateAccount gms = new CreateAccount();
+			case 2: CreateAccount gms = new CreateAccount(); //done
 				break;
 			case 3: open = false;
 				break;
@@ -111,19 +114,19 @@ public class TraderInterface{
 		getUserInput(minInput, maxInput);
 
 		switch(chosenOption) {
-			case 1: Deposit d = new Deposit();
+			case 1: Deposit d = new Deposit(); //done
 				break;
-			case 2: Withdraw w = new Withdraw();
+			case 2: Withdraw w = new Withdraw(); //done
 				break;
-			case 3: Buy b = new Buy();
+			case 3: Buy b = new Buy(); //done
 				break;
-			case 4: Sell s = new Sell();
+			case 4: Sell s = new Sell(); //done
 				break;
-			case 5: ShowBalance sb = new ShowBalance();
+			case 5: ShowBalance sb = new ShowBalance(); //done
 				break;
 			case 6: ShowHistory sh = new ShowHistory();
 				break;
-			case 7: ListStocks ls = new ListStocks();
+			case 7: ListStocks ls = new ListStocks(); //done
 				break;
 			case 8: ShowProfile sp = new ShowProfile();
 				break;

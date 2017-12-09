@@ -1,4 +1,6 @@
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.*;
 
 
@@ -9,6 +11,11 @@ public class stock extends item
 	double current_price;
 	boolean active;
 	String stock_symbol;
+
+	public stock()
+	{
+		super();
+	}
 
 	public stock(int id)
 	{
@@ -70,6 +77,32 @@ public class stock extends item
 			this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public HashMap<String, stock> getAll()
+	{
+		HashMap<String, stock> hm = new HashMap<String, stock>();
+
+		try
+		{
+			this.openConnection();
+			String query = "SELECT stock.s_id, actor.firstname, actor.lastname FROM stock INNER JOIN actor ON actor.s_id = stock.s_id";
+			Statement stmt = this.con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next())
+			{
+				stock s = new stock(rs.getInt("s_id"));
+				String name = rs.getString("firstname")+" "+rs.getString("lastname");
+				hm.put(name, s);
+			}
+			this.closeConnection();
+
+			return hm;
+
+		}catch(Exception e){System.out.println(e);}
+
+		return hm;
 	}
 
 	public double getCurrentPrice()

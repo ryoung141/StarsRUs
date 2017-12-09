@@ -79,7 +79,7 @@ public class marketAccountHandle extends accountHandle
 		return false;
 	}
 
-	public boolean makeWithdrawal(int amount)
+	public boolean makeWithdrawal(double amount)
 	{
 		try
 		{
@@ -104,7 +104,7 @@ public class marketAccountHandle extends accountHandle
 		return this.balance;
 	}
 
-	public boolean validateBalance(int subtract)
+	public boolean validateBalance(double subtract)
 	{
 		return (this.balance - subtract) > 0;
 	}
