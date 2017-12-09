@@ -200,7 +200,7 @@ public class transaction extends item
 		return false;
 	}
 
-	public boolean makeTransaction(int a_id, String type, double amount, int s_id)
+	public boolean makeTransaction(int a_id, String type, double amount, double price, int s_id)
 	{
 		try
 		{
@@ -219,7 +219,7 @@ public class transaction extends item
 				switch(type)
 				{
 					case "buy":
-						query = "INSERT INTO buy(t_id, s_id, amount) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
+						query = "INSERT INTO buy(t_id, s_id, amount, price) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
 						stmt = this.con.createStatement();
 						rs = stmt.executeUpdate(query);
 						this.closeConnection();
@@ -230,7 +230,7 @@ public class transaction extends item
 						break;
 
 					case "sell":
-						query = "INSERT INTO sell(t_id, s_id, amount) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
+						query = "INSERT INTO sell(t_id, s_id, amount, price) VALUES ("+rs1.getInt("t_id")+", "+s_id+", "+amount+")";
 						stmt = this.con.createStatement();
 						rs = stmt.executeUpdate(query);
 						this.closeConnection();

@@ -48,7 +48,7 @@ public class AccountController extends Controller
 		return mh.getBalance();
 	}
 
-	public boolean makeDeposit(int amount)
+	public boolean makeDeposit(double amount)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		marketAccountHandle mh = ah.getMarketAccount();
@@ -56,7 +56,7 @@ public class AccountController extends Controller
 		return mh.makeDeposit(amount);
 	}
 
-	public boolean makeWithdrawal(int amount)
+	public boolean makeWithdrawal(double amount)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		marketAccountHandle mh = ah.getMarketAccount();
@@ -71,12 +71,12 @@ public class AccountController extends Controller
 		}
 	}
 
-	public boolean buyStock(int s_id, double count)
+	public boolean buyStock(int s_id, double amount)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		stock s = new stock(s_id);
-		double amount = count * s.getCurrentPrice();
-		int withdraw = (int) amount;
+		double price = s.getCurrentPrice();
+		double withdraw = price * amount;
 
 		boolean success = false;
 
@@ -87,7 +87,7 @@ public class AccountController extends Controller
 			stockAccountHandle sh1 = sh.getHandle(s_id);
 			if(!sh1.equals(null))
 			{
-				sh1.makePurchase(count);
+				sh1.makePurchase(amount, price);
 			}
 			else
 			{
@@ -97,7 +97,7 @@ public class AccountController extends Controller
 				{
 					sh = ah.getStockAccounts();
 					sh1 = sh.getHandle(s_id);
-					success = sh1.makePurchase(amount);
+					success = sh1.makePurchase(amount, price);
 				}
 			}
 
@@ -114,16 +114,15 @@ public class AccountController extends Controller
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		stock s = new stock(s_id);
-		double amount = count * s.getCurrentPrice();
-		int deposit = (int) amount;
-
+		double price = s.getCurrentPrice();
+		double deposit = price * count;
 		boolean success = false;
 
 		stockAccountHandle sh = ah.getStockAccounts();
 		stockAccountHandle sh1 = sh.getHandle(s_id);
 		if(!sh1.equals(null))
 		{
-			success = sh1.makeSale(count);
+			success = sh1.makeSale(count, price);
 		}
 
 		if(success)

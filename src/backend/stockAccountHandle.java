@@ -106,7 +106,7 @@ public class stockAccountHandle extends accountHandle
 		return null;
 	}
 
-	public boolean makePurchase(double amount)
+	public boolean makePurchase(double amount, double price)
 	{
 		try
 		{
@@ -117,7 +117,7 @@ public class stockAccountHandle extends accountHandle
 			int rs = stmt.executeUpdate(query);
 
 			transaction t = new transaction();
-			boolean ret = t.makeTransaction(this.master_id, "buy", amount, this.s_id);
+			boolean ret = t.makeTransaction(this.master_id, "buy", amount, price, this.s_id);
 
 			return ret;
 
@@ -126,7 +126,7 @@ public class stockAccountHandle extends accountHandle
 		return false;
 	}
 
-	public boolean makeSale(double amount)
+	public boolean makeSale(double amount, double price)
 	{
 		try
 		{
@@ -137,7 +137,7 @@ public class stockAccountHandle extends accountHandle
 			int rs = stmt.executeUpdate(query);
 
 			transaction t = new transaction();
-			boolean ret = t.makeTransaction(this.master_id, "sell", amount, this.s_id);
+			boolean ret = t.makeTransaction(this.master_id, "sell", amount, price, this.s_id);
 
 			return ret;
 
