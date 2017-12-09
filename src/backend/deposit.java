@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class deposit extends transaction
 {
-	int amount;
+	double amount;
 
 	public deposit()
 	{
@@ -22,7 +22,7 @@ public class deposit extends transaction
 			if(rs.next())
 			{
 				this.id = id;
-				this.amount = rs.getInt("amount");
+				this.amount = rs.getDouble("amount");
 			}
 			this.closeConnection();
 

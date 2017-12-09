@@ -154,7 +154,7 @@ public class transaction extends item
 		}catch(Exception e){System.out.println(e);}
 	}
 
-	public boolean makeTransaction(int a_id, String type, int amount)
+	public boolean makeTransaction(int a_id, String type, double amount)
 	{
 		try
 		{
