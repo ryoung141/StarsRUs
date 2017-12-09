@@ -30,7 +30,30 @@ public class Controller
 			}
 		}
 
+		System.out.println("-----------------------------------");
 
-		
+
+		//tests grabbing all stocks for single account
+		ac = new AccountController(ph.get(0).id);
+		System.out.println(ac.getBalance());
+		System.out.println(ac.ph.firstname);
+
+		List<stock> sl = ac.getStocksOwned(ac.ah.id);
+		for(stock s: sl)
+		{
+			System.out.println(s.stock_symbol);
+		}
+
+		System.out.println("-----------------------------------");
+
+		System.out.println(ac.makeDeposit(123.00));
+		System.out.println(ac.getBalance());
+		System.out.println(ac.makeWithdrawal(123.00));
+		System.out.println(ac.getBalance());
+
+		/*System.out.println(ac.buyStock("SKB", 10));
+		System.out.println()*/
+
+
 	}
 }

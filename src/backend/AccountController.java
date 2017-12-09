@@ -4,17 +4,20 @@ import java.util.ArrayList;
 public class AccountController extends Controller
 {
 	public profileHandle ph;
+	public accountHandle ah;
 
 	public AccountController()
 	{
 		super();
 		this.ph = new profileHandle();
+		this.ah = new accountHandle();
 	}
 
 	public AccountController(int id)
 	{
 		super();
 		this.ph = new profileHandle(id);
+		this.ah = new accountHandle(ph.username);
 	}
 
 	public List<profileHandle> getCustomers()
@@ -33,7 +36,7 @@ public class AccountController extends Controller
 
 		for (stockAccountHandle acct: stockAcctList)
 		{
-			ret.add(acct.getStock(sh.s_id));
+			ret.add(acct.getStock(acct.s_id));
 		}
 
 		return ret;
@@ -43,7 +46,6 @@ public class AccountController extends Controller
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		marketAccountHandle mh = ah.getMarketAccount();
-		System.out.println(mh.getBalance());
 
 		return mh.getBalance();
 	}
@@ -71,10 +73,10 @@ public class AccountController extends Controller
 		}
 	}
 
-	public boolean buyStock(int s_id, double amount)
+	public boolean buyStock(String symbol, double amount)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
-		stock s = new stock(s_id);
+		stock s = new stock(symbol);
 		double price = s.getCurrentPrice();
 		double withdraw = price * amount;
 
@@ -84,7 +86,7 @@ public class AccountController extends Controller
 		if(mh.validateBalance(withdraw))
 		{
 			stockAccountHandle sh = ah.getStockAccounts();
-			stockAccountHandle sh1 = sh.getHandle(s_id);
+			stockAccountHandle sh1 = sh.getHandle(s.id);
 			if(!sh1.equals(null))
 			{
 				sh1.makePurchase(amount, price);
@@ -92,11 +94,11 @@ public class AccountController extends Controller
 			else
 			{
 				sh1 = new stockAccountHandle();
-				success = sh1.create(ah.id, s_id);
+				success = sh1.create(ah.id, s.id);
 				if(success)
 				{
 					sh = ah.getStockAccounts();
-					sh1 = sh.getHandle(s_id);
+					sh1 = sh.getHandle(s.id);
 					success = sh1.makePurchase(amount, price);
 				}
 			}
