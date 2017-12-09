@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class stockAccountHandle extends accountHandle
 {
-	int balance;
-	int master_id;
+	public int balance;
+	public int master_id;
 	public int s_id;
 	public List<stockAccountHandle> accountList;
 

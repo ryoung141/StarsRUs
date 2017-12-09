@@ -1,15 +1,5 @@
-/*import accrual.*;
-import accountHandle.*;
-import actor.*;
-import buy.*;
-import contract.*;
-import marketAccountHandle.*;
-import stockAccountHandle.*;
-import profileHandle.*;
-import sell.*;
-import deposit.*;
-import withdrawal.*;
-import transaction.*;*/
+import java.util.List;
+import java.util.ArrayList;
 
 public class Controller
 {
@@ -20,6 +10,27 @@ public class Controller
 
 	public static void main(String[] args)
 	{
+		//get all customers
+		//print market balance
+		//print all stock accts balance
+		AccountController ac = new AccountController();
+		List<profileHandle> ph = ac.getCustomers();
+
+		for(profileHandle p : ph)
+		{
+			System.out.println(p.username);
+			p.getSubAccounts();
+			for(marketAccountHandle mh: p.marketAccountList)
+			{
+				System.out.println(mh.balance);
+			}
+			for(stockAccountHandle sh: p.stockAccountList)
+			{
+				System.out.println(sh.balance);
+			}
+		}
+
+
 		
 	}
 }
