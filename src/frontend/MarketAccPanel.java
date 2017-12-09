@@ -184,7 +184,7 @@ public class MarketAccPanel extends AccountPanel{
 		accountsComboBox.setSelectedItem(AccManagerPanel.MARKET_ACC_PANEL);
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		AccountController ac = new AccountController(LoginPanel.profile_id);
 		return ac.getBalance();
 	}

@@ -5,7 +5,7 @@ import java.sql.*;
 public class buy extends transaction
 {
 	int s_id;
-	float amount;
+	double amount;
 
 	public buy()
 	{
@@ -25,7 +25,7 @@ public class buy extends transaction
 			{
 				this.id = id;
 				this.s_id = rs.getInt("s_id");
-				this.amount = rs.getFloat("amount");
+				this.amount = rs.getDouble("amount");
 			}
 			this.closeConnection();
 

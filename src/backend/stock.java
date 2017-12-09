@@ -5,8 +5,8 @@ import java.sql.*;
 public class stock extends item
 {
 	int a_id;
-	int closing_price;
-	int current_price;
+	double closing_price;
+	double current_price;
 	boolean active;
 	String stock_symbol;
 
@@ -24,8 +24,8 @@ public class stock extends item
 			{
 				this.id = id;
 				this.a_id = rs.getInt("a_id");
-				this.closing_price = rs.getInt("closing_price");
-				this.current_price = rs.getInt("current_price");
+				this.closing_price = rs.getDouble("closing_price");
+				this.current_price = rs.getDouble("current_price");
 				this.stock_symbol = rs.getString("symbol");
 				if(rs.getString("active").equals("1"))
 				{
@@ -55,8 +55,8 @@ public class stock extends item
 			{
 				this.id = rs.getInt("s_id");
 				this.a_id = rs.getInt("a_id");
-				this.closing_price = rs.getInt("closing_price");
-				this.current_price = rs.getInt("current_price");
+				this.closing_price = rs.getDouble("closing_price");
+				this.current_price = rs.getDouble("current_price");
 				this.stock_symbol = symbol;
 				if(rs.getString("active") == "1")
 				{
@@ -72,7 +72,7 @@ public class stock extends item
 		}catch(Exception e){System.out.println(e);}
 	}
 
-	public int getCurrentPrice()
+	public double getCurrentPrice()
 	{
 		return this.current_price;
 	}

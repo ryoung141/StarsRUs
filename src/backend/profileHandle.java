@@ -1,17 +1,16 @@
-
-
+import java.util.List;
+import java.util.ArrayList;
 import java.sql.*;
 
 public class profileHandle extends item
 {
-	ResultSet accountData;
 	accountHandle[] accounts;
-	String username;
-	String firstname;
-	String lastname;
-	String state_code;
-	String phonenumber;
-	String email;
+	public String username;
+	public String firstname;
+	public String lastname;
+	public String state_code;
+	public String phonenumber;
+	public String email;
 	public boolean auth = false;
 
 	public profileHandle()
@@ -65,7 +64,6 @@ public class profileHandle extends item
 			
 			if(!this.isResultSetEmpty(rs))
 			{
-				this.accountData = rs;
 				this.id = rs.getInt("tax_id");
 				this.username = rs.getString("username");
 				this.firstname = rs.getString("firstname");
@@ -111,6 +109,28 @@ public class profileHandle extends item
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
+	}
+
+	public List<profileHandle> getAll()
+	{
+		List<profileHandle> phList = new ArrayList<profileHandle>();
+		try
+		{
+			this.openConnection();
+			Statement stmt = this.con.createStatement();
+			String query = "SELECT tax_id FROM CUSTOMER_PROFILE";
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+				profileHandle handle = new profileHandle(rs.getInt("tax_id"));
+				phList.add(handle);
+			}
+
+			return phList;
+
+		}catch(Exception e){System.out.println(e);}
+
+		return phList;
 	}
 
 	//uncomment for testing

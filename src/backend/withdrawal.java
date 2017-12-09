@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class withdrawal extends transaction
 {
-	int amount;
+	double amount;
 
 	public withdrawal()
 	{
@@ -23,7 +23,7 @@ public class withdrawal extends transaction
 			if(rs.next())
 			{
 				this.id = id;
-				this.amount = rs.getInt("amount");
+				this.amount = rs.getDouble("amount");
 			}
 			this.closeConnection();
 

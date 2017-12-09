@@ -5,10 +5,21 @@ public class AccountController extends Controller
 {
 	public profileHandle ph;
 
+	public AccountController()
+	{
+		super();
+		this.ph = new profileHandle();
+	}
+
 	public AccountController(int id)
 	{
 		super();
 		this.ph = new profileHandle(id);
+	}
+
+	public List<profileHandle> getCustomers()
+	{
+		return this.getHandle().getAll();
 	}
 
 	public List<stock> getStocksOwned(int account_id)
@@ -28,7 +39,7 @@ public class AccountController extends Controller
 		return ret;
 	}
 
-	public int getBalance()
+	public double getBalance()
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		marketAccountHandle mh = ah.getMarketAccount();
@@ -126,6 +137,11 @@ public class AccountController extends Controller
 	public String getOwner()
 	{
 		return this.ph.username;
+	}
+
+	public profileHandle getHandle()
+	{
+		return this.ph;
 	}
 
 

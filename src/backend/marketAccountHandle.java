@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class marketAccountHandle extends accountHandle
 {
-	int balance;
+	double balance;
 
 	public marketAccountHandle()
 	{
@@ -23,7 +23,7 @@ public class marketAccountHandle extends accountHandle
 
 			if(rs.next())
 			{
-				this.balance = rs.getInt("balance");
+				this.balance = rs.getDouble("balance");
 				this.id = id;
 			}
 			this.closeConnection();
@@ -53,12 +53,12 @@ public class marketAccountHandle extends accountHandle
 		return false;
 	}
 
-	public boolean makeDeposit(int amount)
+	public boolean makeDeposit(double amount)
 	{
 		try
 		{
 			this.openConnection();
-			int new_balance = this.balance + amount;
+			double new_balance = this.balance + amount;
 			String query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
@@ -84,7 +84,7 @@ public class marketAccountHandle extends accountHandle
 		try
 		{
 			this.openConnection();
-			int new_balance = this.balance - amount;
+			double new_balance = this.balance - amount;
 			String query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
@@ -99,7 +99,7 @@ public class marketAccountHandle extends accountHandle
 		return false;
 	}
 
-	public int getBalance()
+	public double getBalance()
 	{
 		return this.balance;
 	}
