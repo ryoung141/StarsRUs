@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class item
 {
-	static final String CONNECTION = "jdbc:mysql://localhost:3306/cs174a?useSSL=false";
-	static final String USER = "root";
-	static final String PASS = " ";
+	static final String CONNECTION = "jdbc:mysql://cs174a.engr.ucsb.edu/jordanangDB?useSSL=false";
+	static final String USER = "jordanang";
+	static final String PASS = "148";
 	public static String top_system_date = "3/16/2013";
 	public static int days_since_beginning = 1;
 	public String system_date;
