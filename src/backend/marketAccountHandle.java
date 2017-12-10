@@ -1,11 +1,12 @@
-
-
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.*;
 import java.util.Date;
 
 public class marketAccountHandle extends accountHandle
 {
 	double balance;
+	double avg_daily_balance;
 
 	public marketAccountHandle()
 	{
@@ -17,13 +18,14 @@ public class marketAccountHandle extends accountHandle
 		super();
 		try
 		{
-			String query = "SELECT balance FROM market_account WHERE a_id="+id;
+			String query = "SELECT balance, avg_daily_balance FROM market_account WHERE a_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
 			if(rs.next())
 			{
 				this.balance = rs.getDouble("balance");
+				this.avg_daily_balance = rs.getDouble("avg_daily_balance");
 				this.id = id;
 			}
 			this.closeConnection();
@@ -52,6 +54,8 @@ public class marketAccountHandle extends accountHandle
 
 		return false;
 	}
+
+	// public void makeAccrual()
 
 	public boolean makeDeposit(double amount)
 	{
@@ -97,6 +101,44 @@ public class marketAccountHandle extends accountHandle
 		}catch(Exception e){System.out.println(e);}
 
 		return false;
+	}
+
+	public void incrementDay()
+	{
+		double new_avg = this.avg_daily_balance + this.balance;
+		try
+		{
+			this.openConnection();
+			String query = "UPDATE market_account SET avg_daily_balance="+new_avg+" WHERE a_id="+this.id;
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+		}catch(Exception e){System.out.println(e);}
+	}
+
+	public void incrementAll()
+	{
+		ArrayList<marketAccountHandle> mh = new ArrayList<marketAccountHandle>();
+
+		try
+		{
+			this.openConnection();
+			String query = "SELECT a_id FROM market_account";
+			Statement stmt = this.con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next())
+			{
+				marketAccountHandle m = new marketAccountHandle(rs.getInt("a_id"));
+				mh.add(m);
+			}
+
+		}catch(Exception e){System.out.println(e);}
+
+		for(marketAccountHandle m: mh)
+		{
+			m.incrementDay();
+		}
 	}
 
 	public double getBalance()

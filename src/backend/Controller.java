@@ -4,6 +4,8 @@ import java.util.ArrayList;
 public class Controller
 {
 	public static String date = "3/16/2013";
+	public static int days_since_beginning = item.days_since_beginning;
+	public static boolean open = true;
 
 	public Controller()
 	{

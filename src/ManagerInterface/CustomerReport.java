@@ -16,12 +16,12 @@ public class CustomerReport {
 	private int maxInput = -1;
 	private Scanner scan;
 
-	private ArrayList<Customer> customerList;
+	private ArrayList<profileHandle> customerList;
 
 	//Sample data
-	private Customer customer1 = new Customer("Jordan", "Ang", "CA", "209-598-5978", "jordanang@umail.ucsb.edu", 9012, "jordanang", "myPassword");
-	private Customer customer2 = new Customer("Richard", "Young", "CA", "401-598-5978", "ryoung@umail.ucsb.edu", 7021, "ryoung", "pass123");
-	private Customer customer3 = new Customer("James", "Yang", "CA", "123-554-5978", "jyang@umail.ucsb.edu", 5433, "jyang", "testtt");
+	// private Customer customer1 = new Customer("Jordan", "Ang", "CA", "209-598-5978", "jordanang@umail.ucsb.edu", 9012, "jordanang", "myPassword");
+	// private Customer customer2 = new Customer("Richard", "Young", "CA", "401-598-5978", "ryoung@umail.ucsb.edu", 7021, "ryoung", "pass123");
+	// private Customer customer3 = new Customer("James", "Yang", "CA", "123-554-5978", "jyang@umail.ucsb.edu", 5433, "jyang", "testtt");
 
 	public CustomerReport(){
 		print("\n------------------Customer Report-------------------------\n");
@@ -33,29 +33,39 @@ public class CustomerReport {
 	}
 
 	public void showCustomerReport(int input) {
-		Customer customer = customerList.get(input);
-		print(" THis is a list of all account associated with " + customer.firstName + " " + customer.lastName);
+		profileHandle customer = customerList.get(input);
+		print(" This is a list of all account associated with " + customer.firstname + " " + customer.lastname);
+
+		customer.getSubAccounts();
+		print("Market account balance: "+customer.marketAccountList.get(0).balance);
+		print("Stocks owned & their balances: ");
+
+		for (stockAccountHandle sh: customer.stockAccountList)
+		{
+			stock s = sh.getStock(sh.s_id);
+			print(s.stock_symbol+" ---- "+sh.balance);
+		}
 		return;
 	}
 
 	public void listCustomers(){
 		//fill list with customer objects
-		customerList = getCustomerList();
+		getCustomerList();
 
-		//sample data
+		/*//sample data
 		customerList.add(customer1);
 		customerList.add(customer2);
-		customerList.add(customer3);
+		customerList.add(customer3);*/
 
-		minInput = 1;
-		maxInput = customerList.size();
+		this.minInput = 1;
+		this.maxInput = customerList.size();
 
 		if(minInput > maxInput) {
 			print("There are no customers!");
 		} else {
 			for(int i=minInput; i<=maxInput; i++) {
 				String key = Integer.toString(i);
-				String val = customerList.get(i-1).firstName + " " + customerList.get(i-1).lastName;
+				String val = customerList.get(i-1).firstname + " " + customerList.get(i-1).lastname;
 				print(key + ". " + val);
 			}
 		}
@@ -63,8 +73,10 @@ public class CustomerReport {
 		return;
 	}
 
-	public ArrayList<Customer> getCustomerList() {
-		return new ArrayList<Customer>();
+	public void getCustomerList() {
+		ManagerController mc = new ManagerController();
+
+		this.customerList = mc.getCustomers();
 	}
 
 	public boolean verifyInput(String input) {
@@ -83,13 +95,14 @@ public class CustomerReport {
 		scan = new Scanner(System.in);
 		System.out.print("\nInput: ");
 		userInput = scan.next();
+		min--;
 
 		if(!verifyInput(userInput)) {
 			print("Error: Invalid input. Please enter an input between " + minInput + " and " + maxInput + ".");
 			getUserInput(min, max);
 		}
 
-		chosenOption = Integer.parseInt(userInput);
+		chosenOption = Integer.parseInt(userInput) - 1;
 
 		if(chosenOption < min || chosenOption > max) {
 			print("Error: Invalid input. Please enter an input between " + minInput + " and " + maxInput + ".");

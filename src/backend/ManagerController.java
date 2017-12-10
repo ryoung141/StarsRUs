@@ -25,4 +25,21 @@ public class ManagerController extends Controller
 
 		return ah.getActiveCustomers();
 	}
+
+	public ArrayList<profileHandle> getCustomers()
+	{
+		profileHandle ph = new profileHandle();
+
+		// ArrayList<String> cusList = new ArrayList<String>();
+		ArrayList<profileHandle> phList = new ArrayList<profileHandle>();
+
+		phList = ph.getAll();
+
+		/*for(profileHandle p: phList)
+		{
+			cusList.add(p.firstname+" "+p.lastname);
+		}*/
+
+		return phList;
+	}
 }

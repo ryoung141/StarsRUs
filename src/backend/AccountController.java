@@ -28,6 +28,12 @@ public class AccountController extends Controller
 		this.ah = new accountHandle(ph.username);
 	}
 
+	public void incrementAllMarketAccts()
+	{
+		marketAccountHandle mh = new marketAccountHandle();
+		mh.incrementAll();
+	}
+
 	public List<profileHandle> getCustomers()
 	{
 		return this.getHandle().getAll();
@@ -87,12 +93,18 @@ public class AccountController extends Controller
 		}
 	}
 
+	public void accrueInterest()
+	{
+		marketAccountHandle mh = new marketAccountHandle();
+		// mh.accrueAll();
+	}
+
 	public boolean buyStock(String symbol, double amount)
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		stock s = new stock(symbol);
 		double price = s.getCurrentPrice();
-		double withdraw = price * amount;
+		double withdraw = price * amount + 20;
 
 		boolean success = false;
 
@@ -137,18 +149,26 @@ public class AccountController extends Controller
 		boolean success = false;
 
 		stockAccountHandle sh = ah.getStockAccounts();
-		try
+		marketAccountHandle mh = ah.getMarketAccount();
+		if(mh.validateBalance(20))
 		{
-			stockAccountHandle sh1 = sh.getHandle(s.id, ah.id);
-			if(sh1.validateBalance(count))
+			try
 			{
-				success = sh1.makeSale(count, price);
-			}
-		}catch(NullPointerException e){System.out.println("Error: you don't own that stock!");}
+				stockAccountHandle sh1 = sh.getHandle(s.id, ah.id);
+				if(sh1.validateBalance(count))
+				{
+					success = sh1.makeSale(count, price);
+				}
+			}catch(NullPointerException e){System.out.println("Error: you don't own that stock!");}
 
-		if(success)
-		{
-			success = makeDeposit(deposit);
+			if(success)
+			{
+				success = makeWithdrawal(20);
+				if(success)
+				{
+					success = makeDeposit(deposit);
+				}
+			}
 		}
 
 		return success;
