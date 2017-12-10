@@ -128,7 +128,7 @@ public class TraderInterface{
 				break;
 			case 7: ListStocks ls = new ListStocks(); //done
 				break;
-			case 8: ShowProfile sp = new ShowProfile();
+			case 8: ShowProfile sp = new ShowProfile(); //done
 				break;
 			case 9: MoviesOption lm = new MoviesOption();
 				break;

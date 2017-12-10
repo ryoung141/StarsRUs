@@ -9,31 +9,53 @@ public class ShowProfile {
 	private Scanner scan;
 
 	private String stockSymbol;
-	private Person person;
+	private actor person;
 
 	public ShowProfile() {
 
 		print("\n--------------Stock Profile----------------\n");
 		print("What stock profile would you like to view? Format: Stock symbol");
 		getUserInput_stockSymbol();
-		stockSymbol = userInput.toUpperCase();
+		this.stockSymbol = userInput.toUpperCase();
 		showProfile();
 		return;
 	}
 
-	public Person getPersonProfile(){
-		person = new Person("JOA", "Jordan Ang", "08-30-1996");
-		return person;
+	public String getPersonProfile(){
+		ActorController ac = new ActorController();
+		actor a = ac.getActor(this.stockSymbol);
+
+		this.person = a;
+
+		return ac.getActorName();
 	}
 
 	public void showProfile(){
-		getPersonProfile();
+		String name = getPersonProfile();
 		print("");
-		print("Stock Symbol  : " + person.stockSymbol);
-		print("Name          : " + person.name);
-		print("Date of Birth : " + person.dateOfBirth);
+		print("Stock Symbol  : " + person.stock_symbol);
+		print("Name          : " + name);
+		print("Date of Birth : " + person.date_of_birth);
 		print("Movie Contracts:");
-		person.listMovieContracts();
+		listMovieContracts();
+	}
+
+	public void listMovieContracts() {
+		String leftAlignFormat = "| %-16s | %-16s | %-18s | %-4s | %-11s |%n";
+
+		System.out.format("+------------------+------------------+--------------------+------+-------------+%n");
+		System.out.format("| Signed By        | Movie Title      | Role               | Year | Total Value |%n");
+		System.out.format("+------------------+------------------+--------------------+------+-------------+%n");
+		
+		ActorController ac = new ActorController(this.person.id);
+		ArrayList<contract> cList = ac.getAllContracts();
+
+		for(contract c: cList)
+		{
+			System.out.format(leftAlignFormat, ac.getActorName(), c.title, c.role, Integer.toString(c.year_released), Integer.toString(c.total_value));
+		}
+
+		System.out.format("+------------------+------------------+--------------------+------+-------------+%n");
 	}
 
 	public boolean verifyStockSymbol(String ss) {

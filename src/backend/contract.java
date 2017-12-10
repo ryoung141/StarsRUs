@@ -4,10 +4,11 @@ import java.sql.*;
 
 public class contract extends item
 {
-	int a_id;
-	int year_released;
-	int total_value;
-	String role;
+	public int a_id;
+	public int year_released;
+	public int total_value;
+	public String role;
+	public String title;
 
 	public contract(int id)
 	{
@@ -25,6 +26,7 @@ public class contract extends item
 				this.year_released = rs.getInt("year_released");
 				this.total_value = rs.getInt("total_value");
 				this.role = rs.getString("role");
+				this.title = rs.getString("movie_title");
 			}
 			this.closeConnection();
 
