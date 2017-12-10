@@ -42,4 +42,11 @@ public class ManagerController extends Controller
 
 		return phList;
 	}
+
+	public void setStockPrice(String symbol, double price)
+	{
+		stock s = new stock(symbol);
+
+		s.setStockPrice(price);
+	}
 }

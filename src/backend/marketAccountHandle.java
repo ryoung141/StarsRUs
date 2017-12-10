@@ -83,6 +83,10 @@ public class marketAccountHandle extends accountHandle
 			stmt = this.con.createStatement();
 			rs = stmt.executeUpdate(query);
 
+			query = "UPDATE market_account SET avg_daily_balance=0 WHERE a_id="+this.id;
+			stmt = this.con.createStatement();
+			rs = stmt.executeUpdate(query);
+
 			this.closeConnection();
 		}catch(Exception e){System.out.println(e);}
 	}

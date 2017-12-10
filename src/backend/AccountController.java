@@ -96,7 +96,7 @@ public class AccountController extends Controller
 	public void accrueInterest()
 	{
 		marketAccountHandle mh = new marketAccountHandle();
-		// mh.accrueAll();
+		mh.accrueAll();
 	}
 
 	public boolean buyStock(String symbol, double amount)
