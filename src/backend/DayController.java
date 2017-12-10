@@ -30,7 +30,9 @@ public class DayController extends Controller
 		Controller.date = d;
 		item.setSystemDay(d);
 
-		
+		marketAccountHandle mh = new marketAccountHandle();
+		mh.incrementAll();
+
 	}
 
 	public void setDay(String date)

@@ -19,6 +19,15 @@ public class ManagerController extends Controller
 		return ret;
 	}
 
+	public HashMap<profileHandle, String> getDTER()
+	{
+		accountHandle ah = new accountHandle();
+
+		HashMap<profileHandle, String> hm = ah.getDTER();
+		
+		return hm;
+	}
+
 	public ArrayList<String> getActiveCustomers()
 	{
 		accountHandle ah = new accountHandle();
