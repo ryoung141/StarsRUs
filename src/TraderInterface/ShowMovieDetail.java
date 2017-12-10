@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ShowMovieDetail {
 
@@ -21,7 +22,7 @@ public class ShowMovieDetail {
 	}
 
 	public Movie getMovie(String movieTitle){
-		Movie mov = new Movie("Lord of the Flies", 2002, new HashMap<String, String>(), new HashMap<String, Double>());
+		Movie mov = new Movie("Lord of the Flies", 2002);
 		return mov;
 	}
 
@@ -31,7 +32,18 @@ public class ShowMovieDetail {
 		print("Movie Title    : " + movie.movieTitle);
 		print("Production year: "  + Integer.toString(movie.productionYear));
 		print("Movie Reviews  : ");
+		for (Map.Entry<String, String> e: movie.reviews.entrySet()) {
+			String author = e.getKey();
+			String review = e.getValue();
+		       	print("   " + author + " - " + review);	
+		}
 		print("Movie Ranking  : ");
+		for (Map.Entry<String, Double> e: movie.rankings.entrySet()) {
+                        String author = e.getKey();
+                        Double rating = e.getValue();
+                        print("   " + author + " - " + Double.toString(rating));
+                }
+
 	}
 
 	public void getUserInput() {
