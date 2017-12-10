@@ -13,7 +13,7 @@ public class accrual extends transaction
 
     public accrual(int id)
     {
-        super();
+        super(id);
         try
         {
         String query = "SELECT amount FROM accrue_interest WHERE t_id="+id;

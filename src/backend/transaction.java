@@ -9,7 +9,7 @@ public class transaction extends item
 {
 	public static final double interestRate = 0.03;
 	public int a_id;
-	public int date;
+	public long date;
 	public ArrayList<buy> buyList;
 	public ArrayList<sell> sellList;
 	public ArrayList<deposit> depositList;
@@ -37,7 +37,7 @@ public class transaction extends item
 
 		try
 		{
-			String query = "SELECT a_id, date FROM transactions WHERE t_id="+id;
+			String query = "SELECT a_id, date, system_date FROM transactions WHERE t_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -46,9 +46,9 @@ public class transaction extends item
 				this.id = id;
 				this.a_id = rs.getInt("a_id");
 				this.system_date = rs.getString("system_date");
-				this.date = rs.getInt("date");
+				this.date = rs.getLong("date");
 			}
-			this.closeConnection();
+			// this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
 	}
@@ -160,6 +160,7 @@ public class transaction extends item
 	{
 		try
 		{
+			this.openConnection();
 			long date = System.currentTimeMillis();
  			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", '"+this.system_date+"', "+date+")";
 			Statement stmt = this.con.createStatement();
@@ -196,6 +197,7 @@ public class transaction extends item
 						}
 						break;
 				}
+				this.closeConnection();
 				return success;	
 			}
 		}catch(Exception e){System.out.println(e);}
@@ -206,6 +208,7 @@ public class transaction extends item
 	{
 		try
 		{
+			this.openConnection();
 			long date = System.currentTimeMillis();
  			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", '"+this.system_date+"', "+date+")";
 			Statement stmt = this.con.createStatement();
@@ -242,6 +245,7 @@ public class transaction extends item
 						}
 						break;
 				}
+				this.closeConnection();
 				return success;	
 			}
 		}catch(Exception e){System.out.println(e);}

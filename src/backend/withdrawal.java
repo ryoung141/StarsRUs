@@ -13,7 +13,7 @@ public class withdrawal extends transaction
 
 	public withdrawal(int id)
 	{
-		super();
+		super(id);
 		try
 		{
 			String query = "SELECT amount FROM withdrawal WHERE t_id="+id;

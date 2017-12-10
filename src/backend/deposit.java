@@ -12,7 +12,7 @@ public class deposit extends transaction
 
 	public deposit(int id)
 	{
-		super();
+		super(id);
 		try
 		{
 			String query = "SELECT amount FROM deposit WHERE t_id="+id;
