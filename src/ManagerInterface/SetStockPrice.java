@@ -20,6 +20,9 @@ public class SetStockPrice {
 		print("What price would you like to set " + this.stockSymbol + " to?");
 		getUserInput_amount();
 		this.amount = Double.parseDouble(userInput);
+
+		ManagerController mc = new ManagerController();
+		mc.setStockPrice(this.stockSymbol, this.amount);
 		return;
 	}
 

@@ -58,4 +58,5 @@ public class ManagerController extends Controller
 
 		s.setStockPrice(price);
 	}
+
 }
