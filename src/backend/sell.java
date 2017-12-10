@@ -15,7 +15,7 @@ public class sell extends transaction
 
 	public sell(int id)
 	{
-		super();
+		super(id);
 		try
 		{
 			String query = "SELECT s_id, amount, price FROM sell WHERE t_id="+id;
