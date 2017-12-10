@@ -55,7 +55,10 @@ public class marketAccountHandle extends accountHandle
 		return false;
 	}
 
-	// public void makeAccrual()
+	public void makeAccrual()
+	{
+		
+	}
 
 	public boolean makeDeposit(double amount)
 	{
