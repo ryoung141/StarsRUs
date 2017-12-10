@@ -43,7 +43,8 @@ public class TraderInterface{
 		options = new HashMap<Integer, String>(); 
 		options.put(1, "Login");
 		options.put(2, "Create an account");
-		options.put(3, "Exit");
+		options.put(3, "MangerInterface");
+		options.put(4, "Exit");
 
 		//Logged in settings
 		loggedInOptions = new HashMap<Integer, String>();
@@ -78,7 +79,7 @@ public class TraderInterface{
 		print("Choose an option below");
 
 		minInput = 1;
-		maxInput = 3;
+		maxInput = 4;
 
 		for (int i=minInput; i<=maxInput; i++) {
 			String key = Integer.toString(i);
@@ -93,7 +94,9 @@ public class TraderInterface{
 				break;
 			case 2: CreateAccount gms = new CreateAccount(); //done
 				break;
-			case 3: open = false;
+			case 3: ManagerInterface mi = new ManagerInterface();
+				break;
+			case 4: open = false;
 				break;
 		}
 
