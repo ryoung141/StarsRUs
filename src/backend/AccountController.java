@@ -154,21 +154,57 @@ public class AccountController extends Controller
 		return success;
 	}
 
-	public HashMap<String, ArrayList<transaction>> getTransactions()
+	public ArrayList<buy> getAllBuys()
 	{
 		accountHandle ah = new accountHandle(this.getOwner());
 		transaction t = new transaction();
+		t.getAllBuys(ah.id);
 
-		HashMap<String, ArrayList<transaction>> mappyboi = new HashMap<String, ArrayList<transaction>>();
-		t.getAllTransaction(ah.id);
+		ArrayList<buy> b = t.buyList;
 
-		mappyboi.put("buy", t.buyList);
-		mappyboi.put("sell", t.sellList);
-		mappyboi.put("deposit", t.depositList);
-		mappyboi.put("withdraw", t.withdrawalList);
-		mappyboi.put("accrual", t.accrualList);
+		return b;
+	}
 
-		return mappyboi;
+	public ArrayList<sell> getAllSales()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		transaction t = new transaction();
+		t.getAllSells(ah.id);
+
+		ArrayList<sell> s = t.sellList;
+		return s;
+	}
+
+	public ArrayList<deposit> getAllDeposits()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		transaction t = new transaction();
+		t.getAllDeposits(ah.id);
+
+		ArrayList<deposit> d = t.depositList;
+
+		return d;
+	}
+
+	public ArrayList<withdrawal> getAllWithdrawals()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		transaction t = new transaction();
+		t.getAllWithdrawals(ah.id);
+
+		ArrayList<withdrawal> w = t.withdrawalList;
+		return w;
+	}
+
+	public ArrayList<accrual> getAllAccruals()
+	{
+		accountHandle ah = new accountHandle(this.getOwner());
+		transaction t = new transaction();
+		t.getAllAccruals(ah.id);
+
+		ArrayList<accrual> a = t.accrualList;
+
+		return a;
 	}
 
 	public String getOwner()

@@ -37,6 +37,7 @@ CREATE TABLE account(
 CREATE TABLE market_account(
 	a_id int(100) NOT NULL PRIMARY KEY,
 	balance float(100, 3) NOT NULL,
+	avg_daily_balance float(100, 3),
 	FOREIGN KEY (a_id)
 		REFERENCES account(a_id)
 		ON UPDATE CASCADE ON DELETE CASCADE
@@ -55,6 +56,7 @@ CREATE TABLE stock_account(
 CREATE TABLE transactions(
 	t_id int(100) AUTO_INCREMENT PRIMARY KEY,
 	a_id int(100) NOT NULL,
+	system_date varchar(20),
 	date bigint(255) NOT NULL,
 	FOREIGN KEY (a_id)
 		REFERENCES account(a_id)
@@ -100,7 +102,7 @@ CREATE TABLE sell (
 CREATE TABLE accrue_interest (
   	t_id int(100) NOT NULL PRIMARY KEY,
   	rate float(7, 3) NOT NULL,
-  	avg_daily_balance float(100, 3) NOT NULL,
+  	amount float(7, 3),
   	FOREIGN KEY (t_id)
     	REFERENCES transactions(t_id)
     	ON UPDATE CASCADE ON DELETE CASCADE
@@ -120,7 +122,7 @@ CREATE TABLE actor (
 	firstname varchar(100),
 	lastname varchar(100),
 	s_id int(100),
-	date_of_birth bigint(255),
+	date_of_birth varchar(20),
 	FOREIGN KEY (s_id)
 	    REFERENCES stock(s_id)
 	    ON UPDATE CASCADE
@@ -129,6 +131,7 @@ CREATE TABLE actor (
 CREATE TABLE movie_contract (
 	m_id int(100) NOT NULL, 
 	a_id int(100) NOT NULL,
+	movie_title varchar(255) NOT NULL,
 	role enum('actor', 'director', 'both'),
 	year_released int(100),
 	total_value int(100) NOT NULL,
@@ -179,14 +182,14 @@ INSERT INTO account(owner)
 		   ("frank");
 
 INSERT INTO actor(firstname, lastname, s_id, date_of_birth)
-	VALUES ("Kim", "Basinger", NULL, -349228800),
-		   ("Michael", "Dougles", NULL, -797385600),
-		   ("Tom", "Cruise", NULL, -236649600);
+	VALUES ("Kim", "Basinger", NULL, "12/8/1958"),
+		   ("Michael", "Dougles", NULL, "9/25/1944"),
+		   ("Tom", "Cruise", NULL, "7/3/1926");
 
-INSERT INTO movie_contract(m_id, a_id, role, year_released, total_value)
-	VALUES (3, 1, "actor", 1997, 5000000),
-		   (4, 2, "actor", 1998, 10000000),
-		   (5, 3, "actor", 1996, 5000000);
+INSERT INTO movie_contract(m_id, a_id, movie_title, role, year_released, total_value)
+	VALUES (3, 1, "L.A. Confidential", "actor", 1997, 5000000),
+		   (4, 2, "Perfect Murder", "actor", 1998, 10000000),
+		   (5, 3, "Jerry Maguire", "actor", 1996, 5000000);
 
 INSERT INTO stock(a_id, symbol, closing_price, current_price, active)
 	VALUES (1, "SKB", 40.00, 40.00, '1'),

@@ -2,8 +2,9 @@ import java.sql.*;
 
 public class accrual extends transaction
 {
-    double rate;
-    double avg_daily_balance;
+    public static double rate;
+    public double amount;
+    
 
     public accrual()
     {
@@ -15,7 +16,7 @@ public class accrual extends transaction
         super();
         try
         {
-        String query = "SELECT rate, avg_daily_balance FROM accrue_interest WHERE t_id="+id;
+        String query = "SELECT rate, amount FROM accrue_interest WHERE t_id="+id;
         Statement stmt = this.con.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
@@ -23,7 +24,7 @@ public class accrual extends transaction
         {
         this.id = id;
         this.rate = rs.getDouble("rate");
-        this.avg_daily_balance = rs.getDouble("avg_daily_balance");
+        this.amount = rs.getDouble("amount");
         }
         this.closeConnection();
 

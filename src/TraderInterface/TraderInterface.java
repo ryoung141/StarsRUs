@@ -124,11 +124,11 @@ public class TraderInterface{
 				break;
 			case 5: ShowBalance sb = new ShowBalance(); //done
 				break;
-			case 6: ShowHistory sh = new ShowHistory();
+			case 6: ShowHistory sh = new ShowHistory(); //done
 				break;
 			case 7: ListStocks ls = new ListStocks(); //done
 				break;
-			case 8: ShowProfile sp = new ShowProfile();
+			case 8: ShowProfile sp = new ShowProfile(); //done
 				break;
 			case 9: MoviesOption lm = new MoviesOption();
 				break;

@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class sell extends transaction
 {
-	int s_id;
-	double amount;
-	double price;
+	public int s_id;
+	public double amount;
+	public double price;
 
 	public sell()
 	{
@@ -18,7 +18,7 @@ public class sell extends transaction
 		super();
 		try
 		{
-			String query = "SELECT s_id, amount FROM sell WHERE t_id="+id;
+			String query = "SELECT s_id, amount, price FROM sell WHERE t_id="+id;
 			Statement stmt = this.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -27,10 +27,16 @@ public class sell extends transaction
 				this.id = id;
 				this.s_id = rs.getInt("s_id");
 				this.amount = rs.getDouble("amount");
-				this.amount = rs.getDouble("price");
+				this.price = rs.getDouble("price");
 			}
 			this.closeConnection();
 
 		}catch(Exception e){System.out.println(e);}
+	}
+
+	public String getStock()
+	{
+		stock s = new stock(this.s_id);
+		return s.stock_symbol;
 	}
 }
