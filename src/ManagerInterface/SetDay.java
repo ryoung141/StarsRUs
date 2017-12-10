@@ -17,11 +17,13 @@ public class SetDay {
 	}
 
 	public void setDay(String input){
+		DayController dc = new DayController();
+		dc.setDay(input);
 		print("Day has been set to " + input);
 	}
 
 	public boolean verifyInput(String input) {
-		String regex = "^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]$";
+		String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
 		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(input);
 

@@ -19,6 +19,32 @@ public class profileHandle extends item
 		super();
 	}
 
+	public profileHandle(String username)
+	{
+		super();
+		this.marketAccountList = new ArrayList<marketAccountHandle>();
+		this.stockAccountList = new ArrayList<stockAccountHandle>();
+
+		try
+		{
+			Statement stmt = this.con.createStatement();
+			String query = "SELECT * FROM customer_profile WHERE username='"+username+"'";
+			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next())
+			{
+				this.id = rs.getInt("tax_id");
+				this.username = rs.getString("username");
+				this.firstname = rs.getString("firstname");
+				this.lastname = rs.getString("lastname");
+				this.state_code = rs.getString("state");
+				this.phonenumber = rs.getString("phonenumber");
+				this.email = rs.getString("email");
+				this.auth = true;
+			}
+			this.closeConnection();
+		}catch(Exception e){System.out.println(e);}
+	}
 
 	public profileHandle(String username, String password)
 	{

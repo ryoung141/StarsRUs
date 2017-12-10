@@ -61,7 +61,7 @@ public class ManagerInterface{
 				break;
 			case 3: ListActiveCustomers lac = new ListActiveCustomers(); //done
 				break;
-			case 4: GenerateDter gd = new GenerateDter(); 
+			case 4: GenerateDter gd = new GenerateDter(); //done
 				break;
 			case 5: CustomerReport cr = new CustomerReport(); //done
 				break;
@@ -75,9 +75,9 @@ public class ManagerInterface{
 				dc1.openMarket();
 				print("Market is now open!");
 				break;
-			case 9: SetDay sd = new SetDay(); //set day
+			case 9: SetDay sd = new SetDay(); //done
 				break;
-			case 10: SetStockPrice ssp = new SetStockPrice(); //stock price (manager)
+			case 10: SetStockPrice ssp = new SetStockPrice(); //done
 				break;
 			case 11: close = true;
 				break;
