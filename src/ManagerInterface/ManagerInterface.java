@@ -15,7 +15,7 @@ public class ManagerInterface{
 	public static HashMap<Integer, String> options;
 	public static Scanner scan;
 
-	public static void main(String[] arg){
+	public ManagerInterface(){
 
 		options = new HashMap<Integer, String>(); 
 		options.put(1, "Add Interest");
