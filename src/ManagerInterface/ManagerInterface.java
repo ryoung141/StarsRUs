@@ -75,9 +75,9 @@ public class ManagerInterface{
 				dc1.openMarket();
 				print("Market is now open!");
 				break;
-			case 9:  //set day
+			case 9: SetDay sd = new SetDay(); //set day
 				break;
-			case 10: //stock price (manager)
+			case 10: SetStockPrice ssp = new SetStockPrice(); //stock price (manager)
 				break;
 			case 11: close = true;
 				break;
