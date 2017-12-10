@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class withdrawal extends transaction
 {
-	double amount;
+	public double amount;
 
 	public withdrawal()
 	{

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Controller
 {
+	public static String date = "3/16/2013";
+
 	public Controller()
 	{
 

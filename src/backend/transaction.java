@@ -9,11 +9,11 @@ public class transaction extends item
 {
 	public int a_id;
 	public int date;
-	public List<buy> buyList;
-	public List<sell> sellList;
-	public List<deposit> depositList;
-	public List<withdrawal> withdrawalList;
-	public List<accrual> accrualList;
+	public ArrayList<buy> buyList;
+	public ArrayList<sell> sellList;
+	public ArrayList<deposit> depositList;
+	public ArrayList<withdrawal> withdrawalList;
+	public ArrayList<accrual> accrualList;
 
 	public transaction()
 	{
@@ -44,6 +44,7 @@ public class transaction extends item
 			{
 				this.id = id;
 				this.a_id = rs.getInt("a_id");
+				this.system_date = rs.getString("system_date");
 				this.date = rs.getInt("date");
 			}
 			this.closeConnection();
@@ -159,7 +160,7 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
- 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
+ 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", "+this.system_date+", "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
 
@@ -205,7 +206,7 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
- 			String query = "INSERT INTO transactions(a_id, date) VALUES ("+a_id+", "+date+")";
+ 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", "+this.system_date+", "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
 

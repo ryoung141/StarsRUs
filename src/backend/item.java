@@ -7,6 +7,7 @@ public class item
 	static final String CONNECTION = "jdbc:mysql://localhost:3306/cs174a?useSSL=false";
 	static final String USER = "root";
 	static final String PASS = " ";
+	public String system_date = "3/16/2013";
 	Connection con;
 	public int id;
 
