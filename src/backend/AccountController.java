@@ -102,7 +102,7 @@ public class AccountController extends Controller
 			stockAccountHandle sh = ah.getStockAccounts();
 			try
 			{
-				stockAccountHandle sh1 = sh.getHandle(s.id);
+				stockAccountHandle sh1 = sh.getHandle(s.id, ah.id);
 				success = sh1.makePurchase(amount, price);
 
 			}catch(NullPointerException e)
@@ -112,7 +112,7 @@ public class AccountController extends Controller
 				if(success)
 				{
 					sh = ah.getStockAccounts();
-					sh1 = sh.getHandle(s.id);
+					sh1 = sh.getHandle(s.id, ah.id);
 					success = sh1.makePurchase(amount, price);
 					System.out.println(success+" makepurchase accountcontroller 117");
 				}
@@ -139,7 +139,7 @@ public class AccountController extends Controller
 		stockAccountHandle sh = ah.getStockAccounts();
 		try
 		{
-			stockAccountHandle sh1 = sh.getHandle(s.id);
+			stockAccountHandle sh1 = sh.getHandle(s.id, ah.id);
 			if(sh1.validateBalance(count))
 			{
 				success = sh1.makeSale(count, price);

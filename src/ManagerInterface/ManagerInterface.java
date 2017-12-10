@@ -61,7 +61,7 @@ public class ManagerInterface{
 				break;
 			case 5: CustomerReport cr = new CustomerReport();
 				break;
-			case 6: DeleteTransactions dt = new DeleteTransactions();
+			case 6: DeleteTransactions dt = new DeleteTransactions(); //done
 				break;
 			case 7: close = true;
 				break;

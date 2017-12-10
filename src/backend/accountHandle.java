@@ -1,4 +1,8 @@
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class accountHandle extends item
 {
@@ -76,6 +80,7 @@ public class accountHandle extends item
 			String query = "INSERT INTO account(owner) VALUES ('"+owner+"')";
 			int rs = stmt.executeUpdate(query);
 
+			this.closeConnection();
 			if(rs > 0)
 			{
 				return true;
@@ -84,13 +89,38 @@ public class accountHandle extends item
 			{
 				return false;
 			}
+
 		}catch(Exception e){System.out.println(e);}
 		
 		return false;
+	}
+
+	public ArrayList<String> getActiveCustomers()
+	{
+		ArrayList<String> activeList = new ArrayList<String>();
+
+		try
+		{
+			this.openConnection();
+			String query = "SELECT firstname, lastname FROM customer_profile INNER JOIN (SELECT temp2.owner FROM (SELECT temp.owner, SUM(temp.sell) sales, SUM(temp.buy) purchases FROM (SELECT a.owner, t.t_id, b.amount buy, s.amount sell FROM account a LEFT JOIN transactions t ON t.a_id=a.a_id LEFT JOIN buy b ON b.t_id = t.t_id LEFT JOIN sell s ON s.t_id = t.t_id WHERE t.t_id IS NOT NULL AND (b.amount IS NOT NULL OR s.amount IS NOT NULL)) temp GROUP BY temp.owner) temp2 WHERE temp2.sales+temp2.purchases > 1000 GROUP BY temp2.owner) temp3 on temp3.owner = customer_profile.username";
+			Statement stmt = this.con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next())
+			{
+				activeList.add(rs.getString("firstname")+" "+rs.getString("lastname"));
+			}
+
+			this.closeConnection();
+
+		}catch(Exception e){System.out.println(e);}
+
+		return activeList;
 	}
 
 	public String getOwner()
 	{
 		return this.owner;
 	}
+
 }

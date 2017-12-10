@@ -56,7 +56,7 @@ CREATE TABLE stock_account(
 CREATE TABLE transactions(
 	t_id int(100) AUTO_INCREMENT PRIMARY KEY,
 	a_id int(100) NOT NULL,
-	system_date varchar(20),
+	system_date varchar(100),
 	date bigint(255) NOT NULL,
 	FOREIGN KEY (a_id)
 		REFERENCES account(a_id)
@@ -122,7 +122,7 @@ CREATE TABLE actor (
 	firstname varchar(100),
 	lastname varchar(100),
 	s_id int(100),
-	date_of_birth varchar(20),
+	date_of_birth varchar(100),
 	FOREIGN KEY (s_id)
 	    REFERENCES stock(s_id)
 	    ON UPDATE CASCADE
@@ -150,7 +150,7 @@ ALTER TABLE sell
 	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
 
 ALTER TABLE stock_account
-	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON UPDATE CASCADE;
+	ADD FOREIGN KEY (s_id) REFERENCES stock(s_id) ON DELETE CASCADE;
 
 
 INSERT INTO customer_profile(tax_id, username, password, firstname, lastname, state, phonenumber, email)

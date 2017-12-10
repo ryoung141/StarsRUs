@@ -20,7 +20,17 @@ public class DeleteTransactions {
 	}
 
 	public void DeleteTransactions() {
-		print("All transactions have been deleted");
+		ManagerController mc = new ManagerController();
+		boolean ret = mc.DeleteTransactions();
+
+		if(ret)
+		{
+			print("All transactions have been deleted");
+		}
+		else
+		{
+			print("Error: transaction deletion not successful");
+		}
 	}
 
 	public static void print(String p){

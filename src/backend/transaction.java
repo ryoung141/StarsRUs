@@ -160,7 +160,7 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
- 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", "+this.system_date+", "+date+")";
+ 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", '"+this.system_date+"', "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
 
@@ -206,7 +206,7 @@ public class transaction extends item
 		try
 		{
 			long date = System.currentTimeMillis();
- 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", "+this.system_date+", "+date+")";
+ 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+a_id+", '"+this.system_date+"', "+date+")";
 			Statement stmt = this.con.createStatement();
 			int rs = stmt.executeUpdate(query);
 
@@ -245,6 +245,23 @@ public class transaction extends item
 			}
 		}catch(Exception e){System.out.println(e);}
 		return false;
+	}
+
+
+	public boolean clearAllTransactions()
+	{
+		try
+		{
+			this.openConnection();
+			String query = "DELETE FROM transactions WHERE t_id IS NOT NULL";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			this.closeConnection();
+
+		}catch(Exception e){System.out.println(e);}
+
+		return true;
 	}
 }
 
