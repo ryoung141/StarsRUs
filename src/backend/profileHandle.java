@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class profileHandle extends item
 {
-	public List<marketAccountHandle> marketAccountList;
-	public List<stockAccountHandle> stockAccountList;
+	public ArrayList<marketAccountHandle> marketAccountList;
+	public ArrayList<stockAccountHandle> stockAccountList;
 	public String username;
 	public String firstname;
 	public String lastname;
@@ -116,9 +116,9 @@ public class profileHandle extends item
 		return false;
 	}
 
-	public List<profileHandle> getAll()
+	public ArrayList<profileHandle> getAll()
 	{
-		List<profileHandle> phList = new ArrayList<profileHandle>();
+		ArrayList<profileHandle> phList = new ArrayList<profileHandle>();
 		try
 		{
 			this.openConnection();

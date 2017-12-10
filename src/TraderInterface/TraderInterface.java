@@ -56,7 +56,9 @@ public class TraderInterface{
 		loggedInOptions.put(7, "List stocks");
 		loggedInOptions.put(8, "View actor/director profile");
 		loggedInOptions.put(9, "Movies");
-		loggedInOptions.put(10, "Log out");
+		loggedInOptions.put(10, "Close Market");
+		loggedInOptions.put(11, "Open Market");
+		loggedInOptions.put(12, "Log out");
 
 		//Begin
 		print("\n--------Welcome to the Trader Interface--------");
@@ -103,7 +105,7 @@ public class TraderInterface{
 		print("Choose an option below");
 
 		minInput = 1;
-		maxInput = 10;
+		maxInput = 12;
 
 		for (int i=minInput; i<=maxInput; i++) {
 			String key = Integer.toString(i);
@@ -118,9 +120,25 @@ public class TraderInterface{
 				break;
 			case 2: Withdraw w = new Withdraw(); //done
 				break;
-			case 3: Buy b = new Buy(); //done
+			case 3: 
+				if(Controller.open)
+				{
+					Buy b = new Buy(); //done
+				}
+				else
+				{
+					print("The market is closed for the day. Come back tomorrow!");
+				}
 				break;
-			case 4: Sell s = new Sell(); //done
+			case 4: 
+				if(Controller.open)
+				{
+					Sell s = new Sell(); //done
+				}
+				else
+				{
+					print("The market is closed for the day. Come back tomorrow!");
+				}
 				break;
 			case 5: ShowBalance sb = new ShowBalance(); //done
 				break;
@@ -132,7 +150,15 @@ public class TraderInterface{
 				break;
 			case 9: MoviesOption lm = new MoviesOption();
 				break;
-			case 10: loggedIn = false;
+			case 10: DayController dc = new DayController();
+				dc.closeMarket();
+				print("Market is closed for the day!");
+				break;
+			case 11: DayController dc1 = new DayController();
+				dc1.openMarket();
+				print("Market is now open!");
+				break;
+			case 12: loggedIn = false;
 				break;
 		}
 

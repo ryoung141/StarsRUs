@@ -91,7 +91,7 @@ public class stockAccountHandle extends accountHandle
 		return null;
 	}
 
-	public stockAccountHandle getHandle(int s_id)
+	public stockAccountHandle getHandle(int s_id, int a_id)
 	{
 		if(this.accountList != null)
 		{
@@ -99,7 +99,10 @@ public class stockAccountHandle extends accountHandle
 			{
 				if(sh.s_id == s_id)
 				{
-					return sh;
+					if(sh.master_id == a_id)
+					{
+						return sh;
+					}
 				}
 			}
 		}

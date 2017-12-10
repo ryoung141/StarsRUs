@@ -24,10 +24,13 @@ public class ManagerInterface{
 		options.put(4, "Generate Government Drug & Tax Evasion Report (DTER)");
 		options.put(5, "Generate Customer Report");
 		options.put(6, "Delete Transactions");
-		options.put(7, "Exit");
+		options.put(7, "Close Market");
+		options.put(8, "Open Market");
+		options.put(9, "Set Day");
+		options.put(10, "Exit");
 
 		minInput = 1;
-		maxInput = 7;
+		maxInput = 10;
 
 		print("\n--------------Welcome to the Manager Interface------------\n");
 
@@ -55,15 +58,25 @@ public class ManagerInterface{
 				break;
 			case 2: GenerateMonthlyStatement gms = new GenerateMonthlyStatement();
 				break;
-			case 3: ListActiveCustomers lac = new ListActiveCustomers();
+			case 3: ListActiveCustomers lac = new ListActiveCustomers(); //done
 				break;
-			case 4: GenerateDter gd = new GenerateDter();
+			case 4: GenerateDter gd = new GenerateDter(); 
 				break;
-			case 5: CustomerReport cr = new CustomerReport();
+			case 5: CustomerReport cr = new CustomerReport(); //done
 				break;
-			case 6: DeleteTransactions dt = new DeleteTransactions();
+			case 6: DeleteTransactions dt = new DeleteTransactions(); //done
 				break;
-			case 7: close = true;
+			case 7: DayController dc = new DayController(); //done
+				dc.closeMarket();
+				print("Market is closed for the day!");
+				break;
+			case 8: DayController dc1 = new DayController(); //done
+				dc1.openMarket();
+				print("Market is now open!");
+				break;
+			case 9:
+				break;
+			case 10: close = true;
 				break;
 		}
 

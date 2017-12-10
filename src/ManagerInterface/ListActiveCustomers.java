@@ -26,7 +26,9 @@ public class ListActiveCustomers {
 	}
 
 	public ArrayList<String> getActiveCustomnerList() {
-		return new ArrayList<String>();
+		ManagerController mc = new ManagerController();
+
+		return mc.getActiveCustomers();
 	}
 
 	public static void print(String p){
