@@ -101,7 +101,6 @@ CREATE TABLE sell (
 
 CREATE TABLE accrue_interest (
   	t_id int(100) NOT NULL PRIMARY KEY,
-  	rate float(7, 3) NOT NULL,
   	amount float(7, 3),
   	FOREIGN KEY (t_id)
     	REFERENCES transactions(t_id)

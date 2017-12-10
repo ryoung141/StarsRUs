@@ -57,7 +57,59 @@ public class marketAccountHandle extends accountHandle
 
 	public void makeAccrual()
 	{
-		
+		double new_balance = this.balance + (avg_daily_balance/item.days_since_beginning) * transaction.interestRate;
+		double amount = new_balance - this.balance;
+
+		try 
+		{
+			this.openConnection();
+
+			long date = System.currentTimeMillis();
+ 			String query = "INSERT INTO transactions(a_id, system_date, date) VALUES ("+this.id+", '"+this.system_date+"', "+date+")";
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			query = "SELECT t_id FROM transactions WHERE date="+date;
+			stmt = this.con.createStatement();
+			ResultSet rs1 = stmt.executeQuery(query);
+			if(rs1.next())
+			{
+				query = "INSERT INTO accrue_interest(t_id, amount) VALUES ("+rs1.getInt("t_id")+", "+amount+")";
+				stmt = this.con.createStatement();
+				rs = stmt.executeUpdate(query);
+			}
+
+			query = "UPDATE market_account SET balance="+new_balance+" WHERE a_id="+this.id;
+			stmt = this.con.createStatement();
+			rs = stmt.executeUpdate(query);
+
+			this.closeConnection();
+		}catch(Exception e){System.out.println(e);}
+	}
+
+	public void accrueAll()
+	{
+		ArrayList<marketAccountHandle> mh = new ArrayList<marketAccountHandle>();
+
+		try
+		{
+			this.openConnection();
+			String query = "SELECT a_id FROM market_account";
+			Statement stmt = this.con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next())
+			{
+				marketAccountHandle m = new marketAccountHandle(rs.getInt("a_id"));
+				mh.add(m);
+			}
+
+		}catch(Exception e){System.out.println(e);}
+
+		for(marketAccountHandle mh1: mh)
+		{
+			mh1.makeAccrual();
+		}
 	}
 
 	public boolean makeDeposit(double amount)
