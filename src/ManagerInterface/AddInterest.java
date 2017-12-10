@@ -16,6 +16,10 @@ public class AddInterest {
 
 	public AddInterest(){
 		print("\n--------------------Add Interest--------------------------\n");
+		AccountController ac = new AccountController();
+		ac.accrueInterest();
+		print("\n-----------------------Done!------------------------------\n");
+
 		return;
 	}
 

@@ -7,6 +7,7 @@ import static java.lang.Math.toIntExact;
 
 public class transaction extends item
 {
+	public static final double interestRate = 0.03;
 	public int a_id;
 	public int date;
 	public ArrayList<buy> buyList;

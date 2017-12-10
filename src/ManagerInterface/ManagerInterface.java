@@ -27,10 +27,11 @@ public class ManagerInterface{
 		options.put(7, "Close Market");
 		options.put(8, "Open Market");
 		options.put(9, "Set Day");
-		options.put(10, "Exit");
+		options.put(10, "Set Stock Price");
+		options.put(11, "Exit");
 
 		minInput = 1;
-		maxInput = 10;
+		maxInput = 11;
 
 		print("\n--------------Welcome to the Manager Interface------------\n");
 
@@ -74,9 +75,11 @@ public class ManagerInterface{
 				dc1.openMarket();
 				print("Market is now open!");
 				break;
-			case 9:
+			case 9:  //set day
 				break;
-			case 10: close = true;
+			case 10: //stock price (manager)
+				break;
+			case 11: close = true;
 				break;
 		}
 

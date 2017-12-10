@@ -105,6 +105,19 @@ public class stock extends item
 		return hm;
 	}
 
+	public void setStockPrice(double price)
+	{
+		try
+		{
+			this.openConnection();
+			String query = "UPDATE stock SET current_price="+price+" WHERE s_id="+this.id;
+			Statement stmt = this.con.createStatement();
+			int rs = stmt.executeUpdate(query);
+
+			this.closeConnection();
+		}catch(Exception e){System.out.println(e);}
+	}
+
 	public double getCurrentPrice()
 	{
 		return this.current_price;
